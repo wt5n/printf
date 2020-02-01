@@ -51,7 +51,7 @@ t_printf		*width(t_printf *list);
 t_printf		*precision(t_printf *list);
 t_printf		*length(t_printf *list);
 t_printf		*type(t_printf *list);
-void			*display(t_printf *list);
+void			display(t_printf *list);
 void			type_c(t_printf *list);
 void			c_width(t_printf *list, unsigned int c);
 void			c_width_minus(t_printf *list, unsigned int c);

@@ -43,7 +43,7 @@ t_printf	*newlist_with_printf(t_printf *list)
 	return (list);
 }
 
-void	*display(t_printf *list)
+void	display(t_printf *list)
 {
 	if (list->type == 'd' || list->type == 'i' || list->type == 'D')
 		d_and_i(list);

@@ -6,7 +6,7 @@
 /*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 17:47:52 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/02/01 20:40:13 by hlikely          ###   ########.fr       */
+/*   Updated: 2020/02/01 21:57:15 by hlikely          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ t_printf	*precision(t_printf *list)
 t_printf	*length(t_printf *list)
 {
 	size_t	i;
-	size_t	j;
 
 	i = 0;
 	while (list->args[i] != '\0')
@@ -70,7 +69,7 @@ t_printf	*length(t_printf *list)
 		{
 			list->length[0] = list->f_copy[list->i];
 			list->i++;
-			if (list->f_copy[list->i] == list->length[0]);
+			if (list->f_copy[list->i] == list->length[0])
 			{
 				list->length[1] = list->length[0];
 				list->i++;
