@@ -15,11 +15,11 @@
 typedef	struct 	s_printf
 {
 	const char	*format;
-	char		*flag;
+	char		flag;
 	char		*f_copy;
 	size_t		width;
 	size_t		precision;
-	char		*length;
+	char		length[2];
 	char		type;
 	size_t		widthofline;
 	size_t		widthofcontent;
@@ -28,7 +28,7 @@ typedef	struct 	s_printf
 	int			cow;
 	char		np;
 	int			i;
-	char		*specs;
+	char		*types;
 	char		*args;
 	char		*cons;
 }				t_printf;
@@ -51,6 +51,7 @@ t_printf		*width(t_printf *list);
 t_printf		*precision(t_printf *list);
 t_printf		*length(t_printf *list);
 t_printf		*type(t_printf *list);
+void			*display(t_printf *list);
 void			type_c(t_printf *list);
 void			c_width(t_printf *list, unsigned int c);
 void			c_width_minus(t_printf *list, unsigned int c);
@@ -62,7 +63,7 @@ size_t			ft_len_of_int(long long i);
 void			di_print_without_minus(t_printf *list, long long x);
 void			di_print_with_minus(t_printf *list, long long x);
 void			presicion_over_len(t_printf *list, long long x);
-
+void			type_p(t_printf *list);
 void			type_u(t_printf *list);
 void			u_print_without_minus(t_printf *list, long long x);
 void			u_presicion_over_len(t_printf *list, long long x);

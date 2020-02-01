@@ -5,6 +5,10 @@ int		main(void)
 {
 	int cow = 0;
 	int cow2 = 0;
+	int a;
+	char *b;
+	b = "abc";
+	a = &b;
 	//char c = 'Z';
 	//char c2 = 'Z';
 	//int	x = 230;
@@ -213,9 +217,11 @@ int		main(void)
 	//printf("This is a simple test.");
 	//printf("\n");
 	//ft_printf("This is a simple test.");
-	cow = printf("%ld", (long)INT_MAX + 1);
-	printf("\n");
-	cow2 = ft_printf("%ld", (long)INT_MAX + 1);
-	printf("\ncow :%d\ncow2:%d\n", cow, cow2);
+	//cow = printf("%ld", (long)INT_MAX + 1);
+	//printf("\n");
+	//cow2 = ft_printf("%ld", (long)INT_MAX + 1);
+	//printf("\ncow :%d\ncow2:%d\n", cow, cow2);
+	ft_printf("%p", &a);
+	printf("%p", &a);
 	return (0);
 }

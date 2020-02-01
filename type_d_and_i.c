@@ -102,7 +102,7 @@ void	d_and_i(t_printf *list)
 	if (ft_strcmp(list->length, "Q"))
 	{
 		x = change_length_di(list, x);
-		printf("after:%ld\n", x);
+		//printf("after:%ld\n", x);
 	}
 	if (list->width > ft_len_of_int(x))
 		list->widthofline = list->width;

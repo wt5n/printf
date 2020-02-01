@@ -10,7 +10,6 @@ int		init(t_printf *list)
 	{
 		if (list->f_copy[list->i] == '%')
 		{
-			null_struct(list);
 			list->i++;
 			flag(list);
 			display(list);
@@ -25,18 +24,12 @@ int		init(t_printf *list)
 	return (list->cow);
 }
 
-t_printf	*null_struct(t_printf *list)
-{
-	//всё обнулить
-	return (list);
-}
-
 t_printf	*newlist_with_printf(t_printf *list)
 {
-	//list->flag = 'Q';
+	list->flag = 'Q';
 	list->width = 0;
 	list->precision = 0;
-	list->length = "Q";
+	list->length[0] = 'Q';
 	list->type = 'Q';
 	list->widthofline = 0;
 	list->widthofcontent = 0;
@@ -44,38 +37,31 @@ t_printf	*newlist_with_printf(t_printf *list)
 	list->cow = 0;
 	list->np = 'n';
 	list->i = 0;
-	list->specs = "aAcCeEgGsSnpdDifFuUoxX%";
+	list->types = "aAcCeEgGsSnpdDifFuUoxX%";
 	list->cons = "-+ 0#";
 	list->args = "lhjz";
 	return (list);
 }
 
-t_printf	*display(t_printf *list)
+void	*display(t_printf *list)
 {
-	char	*type;
-
-	type = &list->type;
-	if (*type == 'd' || *type == 'i' || *type == 'D')
+	if (list->type == 'd' || list->type == 'i' || list->type == 'D')
 		d_and_i(list);
-	else if (*type == 'c' || *type == 'C')
+	else if (list->type == 'c' || list->type == 'C')
 		type_c(list);
-	//else if (*type == 'a' || *type == 'A')
-		//type_c(list);
-	else if (*type == 'f' || *type == 'F')
+	else if (list->type == 'f' || list->type == 'F')
 		type_f_and_F(list);
-	//else if (*type == 'g' || *type == 'G')
-		//type_c(list);
-	else if (*type == 's' || *type == 'S')
+	else if (list->type == 's' || list->type == 'S')
 		type_s(list);
-	else if (*type == 'u' || *type == 'U')
+	else if (list->type == 'u' || list->type == 'U')
 		type_u(list);
-	else if (*type == 'x' || *type == 'X' || *type == 'o')
+	else if (list->type == 'x' || list->type == 'X' || list->type == 'o')
 		type_x_and_X(list);
-	else if (*type == 'p')
+	else if (list->type == 'p')
 		type_p(list);
 	else
-		display_other(list);
-	return (list);
+		ft_putstr_cow(list->f_copy, list);
+		//ft_putchar_cow(list->f_copy[i], list);
 }
 
 int		ft_printf(const char *format, ...)
