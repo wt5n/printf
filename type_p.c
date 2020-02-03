@@ -2,10 +2,9 @@
 
 void	type_p(t_printf *list)
 {
-	char *a;
-	
-	a = list->f_copy;
+	long long a;
 
-	ft_itoa_base(a, 16, 'a');
-
+	a = va_arg(list->ap, long long);
+	ft_putstr_cow("0x", list);
+	ft_putstr_cow(adv_ft_itoa((long long)&a, 16, 'b'), list);
 }

@@ -32,7 +32,7 @@ int		main(void)
 /*
 	printf("\n");
 
-	printf(":%s:\n", str);
+	printf(":%p:\n", &str);
 	printf(":%10s:\n", str);
 	printf(":%.10s:\n", str);
 	printf(":%-10s:\n", str);

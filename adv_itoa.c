@@ -1,6 +1,5 @@
 #include "printf.h"
 
-
 size_t	lennum_base(long long n, int base)
 {
 	size_t	i;
