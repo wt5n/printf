@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+         #
+#    By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/16 15:45:02 by ksenaida          #+#    #+#              #
-#    Updated: 2020/02/03 19:22:42 by hlikely          ###   ########.fr        #
+#    Updated: 2020/02/09 14:22:57 by ksenaida         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = printf
+NAME = libftprintf.a
 
 SRC1 = adv_itoa.c ap_arith.c parsing.c ft_printf.c \
 	length.c type_c.c type_d_and_i.c ft_put_cow.c handling_f.c \

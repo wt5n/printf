@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 17:47:52 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/02/01 21:57:15 by hlikely          ###   ########.fr       */
+/*   Updated: 2020/02/09 19:12:46 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,22 @@ t_printf	*flag(t_printf *list)
 
 t_printf	*width(t_printf *list)
 {
+	/*
 	while (list->f_copy[list->i] >= '0' && list->f_copy[list->i] <= '9')
 	{
 		list->width *= 10;
 		list->width += (list->f_copy[list->i] - 48);
 		list->i++;
+	}
+	*/
+	int	num;
+	
+	num = ft_atoi(&list->f_copy[list->i]);
+	list->width = num;
+	while (num > 0)
+	{
+		list->i++;
+		num /= 10;
 	}
 	return (precision(list));
 }
