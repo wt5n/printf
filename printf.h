@@ -27,6 +27,7 @@ typedef	struct 	s_printf
 	va_list		ap;
 	int			cow;
 	char		np;
+	char		nw;
 	int			i;
 	char		*types;
 	char		*args;

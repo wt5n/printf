@@ -36,6 +36,7 @@ t_printf	*newlist_with_printf(t_printf *list)
 	list->base = 10;
 	list->cow = 0;
 	list->np = 'n';
+	list->nw = 'n';
 	list->i = 0;
 	list->types = "aAcCeEgGsSnpdDifFuUoxX%";
 	list->cons = "-+ 0#";

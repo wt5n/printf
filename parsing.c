@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 17:47:52 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/02/13 17:01:48 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/02/13 19:26:20 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,22 @@ t_printf	*width(t_printf *list)
 		list->width += (list->f_copy[list->i] - 48);
 		list->i++;
 	}
-	
+	*/
 	int	num;
 	
-	num = ft_atoi(&list->f_copy[list->i]);
-	list->width = num;
-	while (num > 0)
+	if (list->f_copy[list->i] >= '0' && list->f_copy[list->i] <= '9')
 	{
-		list->i++;
-		num /= 10;
+		num = ft_atoi(&list->f_copy[list->i]);
+		list->width = num;
+		while (num > 0)
+		{
+			list->i++;
+			num /= 10;
+		}
 	}
-	*/
-	list->width = 10;
+	else
+		list->nw = 'y';
+	
 	return (precision(list));
 }
 
