@@ -98,7 +98,8 @@ void	d_and_i(t_printf *list)
 {
 	long long x;
 
-	x = va_arg(list->ap, long long);
+	//было (list->ap, long long), что не работает при минусовых числах
+	x = va_arg(list->ap, int);
 	if (ft_strcmp(list->length, "Q"))
 	{
 		x = change_length_di(list, x);
@@ -113,6 +114,7 @@ void	d_and_i(t_printf *list)
 		else
 			list->widthofline = ft_len_of_int(x);
 	}
+
 	if (list->precision < ft_len_of_int(x))
 		list->widthofcontent = ft_len_of_int(x);
 	else
