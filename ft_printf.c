@@ -2,6 +2,20 @@
 #include <stdlib.h>
 #include "printf.h"
 
+void	reset_list(t_printf *list)
+{
+	list->flag = 'Q';
+	list->width = 0;
+	list->precision = 0;
+	list->length[0] = 'Q';
+	list->type = 'Q';
+	list->widthofline = 0;
+	list->widthofcontent = 0;
+	list->base = 10;
+	list->np = 'n';
+	list->nw = 'n';
+}
+
 int		init(t_printf *list)
 {
 	if (ft_strcmp(list->f_copy, "%") == 0)
@@ -13,6 +27,7 @@ int		init(t_printf *list)
 			list->i++;
 			flag(list);
 			display(list);
+			reset_list(list);
 		}
 		else
 		{

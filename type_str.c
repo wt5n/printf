@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 14:34:15 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/02/13 20:27:01 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/02/14 20:22:52 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ void	str_print_with_minus(t_printf *list, char *str)
 			list->widthofline--;
 			list->widthofcontent--;
 		}
-		ft_putchar_cow(' ', list);
-		list->widthofline--;
+		if (list->widthofline > 0)
+		{
+			ft_putchar_cow(' ', list);
+			list->widthofline--;
+		}
 	}
 }
 
@@ -52,10 +55,11 @@ void	type_s(t_printf *list)
 
 	str = va_arg(list->ap, char*);
 	if (str == 0)
-		ft_putstr_cow("(null)", list);
+		//ft_putstr_cow("(null)", list);
+		str = "(null)";
 	else
 	{
-		if (list->width > ft_strlen(str))
+		if (list->width >= ft_strlen(str))
 			list->widthofline = list->width;
 		else if (list->width < ft_strlen(str) && list->nw == 'n' && \
 				list->precision < ft_strlen(str) && list->np == 'n')
