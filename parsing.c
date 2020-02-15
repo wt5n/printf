@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 17:47:52 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/02/13 19:26:20 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/02/15 17:52:49 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 t_printf	*flag(t_printf *list)
 {
 	if (list->f_copy[list->i] == '+')
+	{
 		list->flag = '+';
+		if (list->f_copy[list->i + 1] == '0')
+			list->flag2 = '0';
+	}
 	if (list->f_copy[list->i] == '-')
 		list->flag = '-';
 	if (list->f_copy[list->i] == '#')
@@ -25,6 +29,8 @@ t_printf	*flag(t_printf *list)
 	if (list->f_copy[list->i] == ' ')
 		list->flag = ' ';
 	if (list->flag != 'Q')
+		list->i++;
+	if (list->flag2 != 'Q')
 		list->i++;
 	return (width(list));
 }
@@ -62,16 +68,17 @@ t_printf	*precision(t_printf *list)
 	if (list->f_copy[list->i] == '.')
 	{
 		list->i++;
-		list->precision = 0;
+		//list->precision = 0;
+		while (list->f_copy[list->i] >= '0' && list->f_copy[list->i] <= '9')
+		{
+			list->precision *= 10;
+			list->precision += (list->f_copy[list->i] - 48);
+			list->i++;
+		}
 	}
 	else 
 		list->np = 'y';
-	while (list->f_copy[list->i] >= '0' && list->f_copy[list->i] <= '9')
-	{
-		list->precision *= 10;
-		list->precision += (list->f_copy[list->i] - 48);
-		list->i++;
-	}
+	
 	return (length(list));
 }
 
