@@ -26,6 +26,11 @@ void	di_print_with_minus(t_printf *list, long long x)
 		list->widthofline--;
 		list->widthofcontent--;
 	}
+	if ((list->flag == ' ' || list->flag2 == ' ') && (int)x >= 0)
+	{
+		ft_putchar_cow(' ', list);
+		list->widthofline--;
+	}
 	if ((int)x < 0)
 	{
 		ft_putchar_cow('-', list);
@@ -33,16 +38,20 @@ void	di_print_with_minus(t_printf *list, long long x)
 		if (list->precision > list->len_of_x)
 			list->widthofline--;
 	}
-	list->len_of_x = ft_len_of_int(x);
+	if (list->len_of_x > 0)
+		list->len_of_x = ft_len_of_int(x);
 	
 	while (list->precision > list->len_of_x)
 	{
 		ft_putchar_cow('0', list);
 		list->precision--;
 	}
-	ft_putstr_cow(ft_itoa(x), list);
-	list->widthofline -= list->len_of_x;
-	list->widthofcontent -= list->len_of_x;
+	if (list->len_of_x > 0)
+	{
+		ft_putstr_cow(ft_itoa(x), list);
+		list->widthofline -= list->len_of_x;
+		list->widthofcontent -= list->len_of_x;
+	}
 	while (list->widthofline > list->widthofcontent)
 	{
 		ft_putchar_cow(' ', list);
@@ -97,12 +106,17 @@ void	presicion_over_len(t_printf *list, long long x)
 		ft_putchar_cow('0', list);
 		list->widthofcontent--;
 	}
-	
-	ft_putstr_cow(ft_itoa(x), list);
+	if (list->len_of_x > 0)
+		ft_putstr_cow(ft_itoa(x), list);
 }
 
 void	di_print_without_minus(t_printf *list, long long x)
 {
+	if ((list->flag == ' ' || list->flag2 == ' ') && list->width >= list->len_of_x && (int)x >= 0)
+	{
+		ft_putchar_cow(' ', list);
+		list->widthofline--;
+	}
 	while (list->widthofline > list->widthofcontent && \
 		((list->precision < list->len_of_x && list->np == 'n') || \
 		(list->flag != '0' && list->flag2 != '0')))
@@ -134,8 +148,8 @@ void	di_print_without_minus(t_printf *list, long long x)
 			ft_putchar_cow(' ', list);
 		list->widthofline--;
 	}
-	
-	ft_putstr_cow(ft_itoa(x), list);
+	if (list->len_of_x > 0)
+		ft_putstr_cow(ft_itoa(x), list);
 }
 
 void	d_and_i(t_printf *list)
@@ -145,6 +159,10 @@ void	d_and_i(t_printf *list)
 	//было (list->ap, long long), что не работает при минусовых числах
 	x = va_arg(list->ap, int);
 	list->len_of_x = ft_len_of_int(x);
+
+	if (list->precision == 0 && list->np == 'n')
+		list->len_of_x = 0;
+
 	if (ft_strcmp(list->length, "Q"))
 	{
 		x = change_length_di(list, x);
@@ -154,7 +172,9 @@ void	d_and_i(t_printf *list)
 		list->widthofline = list->width;
 	else
 	{
-		if (list->precision < list->len_of_x && list->precision > 0)
+		//if (list->precision < list->len_of_x && list->precision > 0)
+		//	list->widthofline = list->precision;
+		if (list->precision > list->len_of_x && list->precision > list->width)
 			list->widthofline = list->precision;
 		else
 			list->widthofline = list->len_of_x;
@@ -165,13 +185,15 @@ void	d_and_i(t_printf *list)
 	else
 		list->widthofcontent = list->precision;
 	
-	if (((list->flag == '+' || list->flag2 == '+') || list->flag == ' ') && x >= 0)
+	if (((list->flag == '+' || list->flag2 == '+') || \
+		(list->flag == ' ' && (list->len_of_x + 1 > list->width))) && x >= 0)
 	{
 		if (list->flag == '+' || list->flag2 == '+')
 			list->widthofcontent++;
 		if (list->widthofline < list->widthofcontent || list->flag == ' ')
 			list->widthofline++;
 	}
+
 	if ((list->flag == '-' || list->flag2 == '-') && (list->width > list->widthofcontent))
 		di_print_with_minus(list, x);
 	else if (list->precision > list->len_of_x - 1)

@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 17:47:52 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/02/16 17:05:15 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/02/16 21:19:31 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_printf	*flag(t_printf *list)
 */
 t_printf	*flag(t_printf *list)
 {
-	char	fff[4] = "QQQ\0";
+	char	fff[5] = "QQQQ\0";
 	int		i;
 	int		x;
 	int		j;
@@ -71,13 +71,45 @@ t_printf	*flag(t_printf *list)
 		}
 		j++;
 	}
+	if (fff[0] == ' ' && fff[1] == '0' && fff[2] == '+' && fff[3] == '-')
+	{
+		list->flag = '+';
+		list->flag2 = '-';
+	}
 	if (fff[0] == '0' && fff[1] == '+' && fff[2] == '-')
 	{
 		list->flag = '+';
 		list->flag2 = '-';
 	}
+	else if (fff[0] == ' ' && fff[1] == '+' && fff[2] == '0')
+	{
+		list->flag = '+';
+		list->flag2 = '0';
+	}
+	else if (fff[0] == ' ' && fff[1] == '+' && fff[2] == '-')
+	{
+		list->flag = '+';
+		list->flag2 = '-';
+	}
+	else if (fff[0] == ' ' && fff[1] == '0' && fff[2] == '-')
+	{
+		list->flag = ' ';
+		list->flag2 = '-';
+	}
+	else if (fff[0] == ' ' && fff[1] == '0' && fff[2] == '+')
+	{
+		list->flag = '0';
+		list->flag2 = '+';
+	}
+	else if (fff[0] == ' ' && fff[1] == '0' && fff[2] == '+')
+	{
+		list->flag = '0';
+		list->flag2 = '+';
+	}
 	else if (fff[0] == '0' && fff[1] == '-')
 		list->flag = '-';
+	else if (fff[0] == ' ' && fff[1] == '+')
+		list->flag = '+';
 	else
 	{
 		list->flag = fff[0];
