@@ -30,6 +30,7 @@ typedef	struct 	s_printf
 	char		np;
 	char		nw;
 	int			i;
+	size_t		len_of_x;
 	char		*types;
 	char		*args;
 	char		*cons;
