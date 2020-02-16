@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 17:47:52 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/02/15 17:52:49 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/02/16 13:56:38 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,25 @@ t_printf	*flag(t_printf *list)
 		list->flag = '+';
 		if (list->f_copy[list->i + 1] == '0')
 			list->flag2 = '0';
+		if (list->f_copy[list->i + 1] == '-')
+			list->flag2 = '-';
 	}
 	if (list->f_copy[list->i] == '-')
 		list->flag = '-';
 	if (list->f_copy[list->i] == '#')
 		list->flag = '#';
 	if (list->f_copy[list->i] == '0')
+	{
 		list->flag = '0';
+		//flag '0' is ignored when flag '-' is present
+		if (list->f_copy[list->i + 1] == '-')
+		{
+			list->flag = '-';
+			list->i++;
+		}
+		if (list->f_copy[list->i + 1] == '+')
+			list->flag2 = '+';
+	}
 	if (list->f_copy[list->i] == ' ')
 		list->flag = ' ';
 	if (list->flag != 'Q')

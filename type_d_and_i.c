@@ -20,6 +20,12 @@ size_t	ft_len_of_int(long long i)
 
 void	di_print_with_minus(t_printf *list, long long x)
 {
+	if (list->flag == '+' && (int)x >= 0)
+	{
+		ft_putchar_cow('+', list);
+		list->widthofline--;
+		list->widthofcontent--;
+	}
 	if ((int)x < 0)
 	{
 		ft_putchar_cow('-', list);
@@ -28,12 +34,7 @@ void	di_print_with_minus(t_printf *list, long long x)
 			list->widthofline--;
 	}
 	list->len_of_x = ft_len_of_int(x);
-	if (list->flag == '+' && (int)x >= 0)
-	{
-		ft_putchar_cow('+', list);
-		list->widthofline--;
-		list->widthofcontent--;
-	}
+	
 	while (list->precision > list->len_of_x)
 	{
 		ft_putchar_cow('0', list);
@@ -77,7 +78,7 @@ void	presicion_over_len(t_printf *list, long long x)
 		ft_putchar_cow(' ', list);
 		list->widthofline--;
 	}
-	if (list->flag == '+' && x >= 0)
+	if ((list->flag == '+' || list->flag2 == '+') && x >= 0)
 	{
 		ft_putchar_cow('+', list);
 		list->widthofline--;
@@ -103,13 +104,14 @@ void	presicion_over_len(t_printf *list, long long x)
 void	di_print_without_minus(t_printf *list, long long x)
 {
 	while (list->widthofline > list->widthofcontent && \
-		list->flag != '0' && list->flag2 != '0')
+		((list->precision < list->len_of_x && list->np == 'n') || \
+		(list->flag != '0' && list->flag2 != '0')))
 	{
 		ft_putchar_cow(' ', list);
 		list->widthofline--;
 	}
 
-	if (list->flag == '+' && (int)x >= 0)
+	if ((list->flag == '+' || list->flag2 == '+') && (int)x >= 0)
 	{
 		ft_putchar_cow('+', list);
 		list->widthofline--;
@@ -163,14 +165,14 @@ void	d_and_i(t_printf *list)
 	else
 		list->widthofcontent = list->precision;
 	
-	if ((list->flag == '+' || list->flag == ' ') && x >= 0)
+	if (((list->flag == '+' || list->flag2 == '+') || list->flag == ' ') && x >= 0)
 	{
-		if (list->flag == '+')
+		if (list->flag == '+' || list->flag2 == '+')
 			list->widthofcontent++;
 		if (list->widthofline < list->widthofcontent || list->flag == ' ')
 			list->widthofline++;
 	}
-	if ((list->flag == '-') && (list->width > list->widthofcontent))
+	if ((list->flag == '-' || list->flag2 == '-') && (list->width > list->widthofcontent))
 		di_print_with_minus(list, x);
 	else if (list->precision > list->len_of_x - 1)
 		presicion_over_len(list, x);
