@@ -20,7 +20,7 @@ size_t	ft_len_of_int(long long i)
 
 void	di_print_with_minus(t_printf *list, long long x)
 {
-	if (list->flag == '+' && (int)x >= 0)
+	if ((list->flag == '+' || list->flag2 == '+') && (int)x >= 0)
 	{
 		ft_putchar_cow('+', list);
 		list->widthofline--;

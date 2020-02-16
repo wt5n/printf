@@ -6,12 +6,12 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 17:47:52 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/02/16 13:56:38 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/02/16 17:05:15 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
-
+/*
 t_printf	*flag(t_printf *list)
 {
 	if (list->f_copy[list->i] == '+')
@@ -44,6 +44,45 @@ t_printf	*flag(t_printf *list)
 		list->i++;
 	if (list->flag2 != 'Q')
 		list->i++;
+	return (width(list));
+}
+*/
+t_printf	*flag(t_printf *list)
+{
+	char	fff[4] = "QQQ\0";
+	int		i;
+	int		x;
+	int		j;
+	
+	x = 0;
+	j = 0;
+	while (j < 5)
+	{
+		i = 0;
+		while (i < 5)
+		{
+			if (list->cons[i] == list->f_copy[list->i])
+			{
+				fff[x] = list->cons[i];
+				x++;
+				list->i++;
+			}
+			i++;
+		}
+		j++;
+	}
+	if (fff[0] == '0' && fff[1] == '+' && fff[2] == '-')
+	{
+		list->flag = '+';
+		list->flag2 = '-';
+	}
+	else if (fff[0] == '0' && fff[1] == '-')
+		list->flag = '-';
+	else
+	{
+		list->flag = fff[0];
+		list->flag2 = fff[1];
+	}
 	return (width(list));
 }
 
