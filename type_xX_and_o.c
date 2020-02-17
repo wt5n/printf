@@ -1,7 +1,28 @@
 #include "printf.h"
 
+void	sharp_x(t_printf *list)
+{
+	if (list->flag == '#' && list->type == 'o')
+	{
+		ft_putchar_cow('0', list);
+		list->widthofline--;
+	}
+	else if (list->flag == '#' && list->type == 'x')
+	{
+		ft_putstr_cow("0x", list);
+		list->widthofline -= 2;
+	}
+	else if (list->flag == '#' && list->type == 'X')
+	{
+		ft_putstr_cow("0X", list);
+		list->widthofline -= 2;
+	}
+}
+
 void	x_print_with_minus(t_printf *list, long long x)
 {
+	if (list->flag == '#' && list->len_of_x > 0)
+		sharp_x(list);
 	if (list->len_of_x > 0)
 		list->len_of_x = ft_len_of_int(x);
 	
@@ -26,12 +47,15 @@ void	x_print_with_minus(t_printf *list, long long x)
 
 void	x_presicion_over_len(t_printf *list, long long x)
 {
-	
+	if (list->flag == '#' && list->len_of_x > 0)
+		list->widthofline -= 2;
 	while (list->widthofline > list->widthofcontent)
 	{
 		ft_putchar_cow(' ', list);
 		list->widthofline--;
 	}
+	if (list->flag == '#' && list->len_of_x > 0)
+		sharp_x(list);
 	while (list->widthofcontent > list->len_of_x)
 	{
 		ft_putchar_cow('0', list);
@@ -43,6 +67,8 @@ void	x_presicion_over_len(t_printf *list, long long x)
 
 void	x_print_without_minus(t_printf *list, long long x)
 {
+	if (list->flag == '#' && list->len_of_x > 0)
+		list->widthofline -= 2;
 	while (list->widthofline > list->widthofcontent && \
 		((list->precision < list->len_of_x && list->np == 'n') || \
 		(list->flag != '0' && list->flag2 != '0')))
@@ -58,27 +84,10 @@ void	x_print_without_minus(t_printf *list, long long x)
 			ft_putchar_cow(' ', list);
 		list->widthofline--;
 	}
+	if (list->flag == '#' && list->len_of_x > 0)
+		sharp_x(list);
 	if (list->len_of_x > 0)
 		ft_putstr_cow(adv_ft_itoa(x, list->base, list->type), list);
-}
-
-void	sharp_x(t_printf *list)
-{
-	if (list->flag == '#' && list->type == 'o')
-	{
-		ft_putchar_cow('0', list);
-		list->widthofline--;
-	}
-	else if (list->flag == '#' && list->type == 'x')
-	{
-		ft_putstr_cow("0x", list);
-		list->widthofline -= 2;
-	}
-	else if (list->flag == '#' && list->type == 'X')
-	{
-		ft_putstr_cow("0X", list);
-		list->widthofline -= 2;
-	}
 }
 
 void	type_x_and_X(t_printf *list)
@@ -108,9 +117,7 @@ void	type_x_and_X(t_printf *list)
 		list->widthofcontent = list->len_of_x;
 	else
 		list->widthofcontent = list->precision;
-	if (list->flag == '#')
-		sharp_x(list);
-	if ((list->flag == '-') && (list->width > list->widthofcontent))
+	if ((list->flag == '-' || list->flag2 == '-') && (list->width > list->widthofcontent))
 		x_print_with_minus(list, x);
 	else if (list->precision > list->len_of_x - 1)
 		x_presicion_over_len(list, x);
