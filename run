@@ -1,1 +1,1 @@
-gcc -g -Wall -Wextra -Werror adv_itoa.c ap_arith.c parsing.c ft_printf.c length.c type_c.c type_d_and_i.c ft_put_cow.c handling_f.c type_f_and_F.c type_str.c type_u.c type_xX_and_o.c type_p.c lib.c main.c
+gcc -g -Wall -Wextra -Werror adv_itoa.c ap_arith.c parsing.c ft_printf.c length.c type_c.c type_d_and_i.c ft_put_cow.c handling_f.c type_f_and_F.c type_str.c type_u.c type_xX_and_o.c type_p.c lib.c main.c type_o.c

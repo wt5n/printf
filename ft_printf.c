@@ -77,6 +77,8 @@ void	display(t_printf *list)
 		type_u(list);
 	else if (list->type == 'x' || list->type == 'X' || list->type == 'o')
 		type_x_and_X(list);
+	else if (list->type == 'o')
+		type_o(list);
 	else if (list->type == 'p')
 		type_p(list);
 	else

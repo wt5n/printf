@@ -2,13 +2,6 @@
 
 void	u_print_with_minus(t_printf *list, long long x)
 {
-	if ((int)x < 0)
-	{
-		ft_putchar_cow('-', list);
-		x *= - 1;
-		if (list->precision > list->len_of_x)
-			list->widthofline--;
-	}
 	if (list->len_of_x > 0)
 		list->len_of_x = ft_len_of_int(x);
 	
@@ -58,16 +51,7 @@ void	u_print_without_minus(t_printf *list, long long x)
 	while (list->widthofline > list->widthofcontent)
 	{
 		if (list->flag == '0' || list->flag2 == '0')
-		{
-			if ((int)x < 0)
-			{
-				ft_putchar_cow('-', list);
-				x *= -1;
-				list->widthofcontent--;
-				list->widthofline--;
-			}
 			ft_putchar_cow('0', list);
-		}
 		else
 			ft_putchar_cow(' ', list);
 		list->widthofline--;

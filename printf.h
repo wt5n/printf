@@ -89,4 +89,6 @@ long 			change_length_di(t_printf *list, long long x);
 void 			change_length_u_x(t_printf *list, long long x);
 void 			change_length_f_e_a_g(t_printf *list, double x);
 
+void			type_o(t_printf *list);
+
 #endif
