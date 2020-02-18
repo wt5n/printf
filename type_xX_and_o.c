@@ -21,10 +21,10 @@ void	sharp_x(t_printf *list)
 
 void	x_print_with_minus(t_printf *list, long long x)
 {
-	if (list->flag == '#' && list->len_of_x > 0)
+	if (list->flag == '#' && list->len_of_x > 0 && list->widthofline > 1 && x != 0)
 		sharp_x(list);
 	if (list->len_of_x > 0)
-		list->len_of_x = ft_len_of_int(x);
+		list->len_of_x = lennum_base(x, list->base);
 	
 	while (list->precision > list->len_of_x)
 	{
@@ -67,7 +67,7 @@ void	x_presicion_over_len(t_printf *list, long long x)
 
 void	x_print_without_minus(t_printf *list, long long x)
 {
-	if (list->flag == '#' && list->len_of_x > 0)
+	if (list->flag == '#' && list->len_of_x > 0 && list->widthofline > 1 && x != 0)
 		list->widthofline -= 2;
 	while (list->widthofline > list->widthofcontent && \
 		((list->precision < list->len_of_x && list->np == 'n') || \
@@ -84,7 +84,7 @@ void	x_print_without_minus(t_printf *list, long long x)
 			ft_putchar_cow(' ', list);
 		list->widthofline--;
 	}
-	if (list->flag == '#' && list->len_of_x > 0)
+	if (list->flag == '#' && list->len_of_x > 0 && x != 0)
 		sharp_x(list);
 	if (list->len_of_x > 0)
 		ft_putstr_cow(adv_ft_itoa(x, list->base, list->type), list);
