@@ -1,4 +1,5 @@
 #include "printf.h"
+#include <limits.h>
 
 size_t	ft_len_of_int(long long i)
 {
@@ -48,7 +49,7 @@ void	di_print_with_minus(t_printf *list, long long x)
 	}
 	if (list->len_of_x > 0)
 	{
-		ft_putstr_cow(ft_itoa(x), list);
+		ft_putstr_cow(adv_ft_itoa(x, 10, 'a'), list);
 		list->widthofline -= list->len_of_x;
 		list->widthofcontent -= list->len_of_x;
 	}
@@ -107,7 +108,7 @@ void	presicion_over_len(t_printf *list, long long x)
 		list->widthofcontent--;
 	}
 	if (list->len_of_x > 0)
-		ft_putstr_cow(ft_itoa(x), list);
+		ft_putstr_cow(adv_ft_itoa(x, 10, 'a'), list);
 }
 
 void	di_print_without_minus(t_printf *list, long long x)
@@ -149,25 +150,36 @@ void	di_print_without_minus(t_printf *list, long long x)
 		list->widthofline--;
 	}
 	if (list->len_of_x > 0)
-		ft_putstr_cow(ft_itoa(x), list);
+		ft_putstr_cow(adv_ft_itoa(x, 10, 'a'), list);
 }
 
 void	d_and_i(t_printf *list)
 {
-	long long x;
+	intmax_t x;
 
-	//было (list->ap, long long), что не работает при минусовых числах
-	x = va_arg(list->ap, int);
+	if (ft_strcmp(list->length,"l") == 0)
+		x = (long)va_arg(list->ap, long int);
+	else if (ft_strcmp(list->length,"ll") == 0)
+		x = (long long)va_arg(list->ap, long long int);
+	else if (ft_strcmp(list->length,"hh") == 0)
+		x = (signed char)va_arg(list->ap, int);
+	else if (ft_strcmp(list->length,"h") == 0)
+		x = (short)va_arg(list->ap, int);
+	else
+		x = (int)va_arg(list->ap, long int);
+
+	x = (intmax_t)x;
+
 	list->len_of_x = ft_len_of_int(x);
 
 	if (list->precision == 0 && list->np == 'n')
 		list->len_of_x = 0;
 
-	if (ft_strcmp(list->length, "Q"))
+	/*if (ft_strcmp(list->length, "Q"))
 	{
 		x = change_length_di(list, x);
 		//printf("after:%ld\n", x);
-	}
+	}*/
 	if (list->width > list->len_of_x)
 		list->widthofline = list->width;
 	else
