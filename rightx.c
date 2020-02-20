@@ -6,6 +6,8 @@ void	sharp_x(t_printf *list)
 	{
 		ft_putchar_cow('0', list);
 		list->widthofline--;
+		list->widthofcontent--;
+		list->len_of_x--;
 	}
 	else if (list->flag == '#' && list->type == 'x')
 	{
