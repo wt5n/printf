@@ -8,7 +8,7 @@
             "name": "(lldb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/Users/ksenaida/Desktop/wt5nprintf/a.out",
+            "program": "/Users/hlikely/Desktop/printf/a.out",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

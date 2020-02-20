@@ -157,6 +157,7 @@ void	d_and_i(t_printf *list)
 {
 	intmax_t x;
 
+	//printf("%s\n", list->length);
 	if (ft_strcmp(list->length,"l") == 0)
 		x = (long)va_arg(list->ap, long int);
 	else if (ft_strcmp(list->length,"ll") == 0)
@@ -174,18 +175,10 @@ void	d_and_i(t_printf *list)
 
 	if (list->precision == 0 && list->np == 'n')
 		list->len_of_x = 0;
-
-	/*if (ft_strcmp(list->length, "Q"))
-	{
-		x = change_length_di(list, x);
-		//printf("after:%ld\n", x);
-	}*/
 	if (list->width > list->len_of_x)
 		list->widthofline = list->width;
 	else
 	{
-		//if (list->precision < list->len_of_x && list->precision > 0)
-		//	list->widthofline = list->precision;
 		if (list->precision > list->len_of_x && list->precision > list->width)
 			list->widthofline = list->precision;
 		else
@@ -205,7 +198,6 @@ void	d_and_i(t_printf *list)
 		if (list->widthofline < list->widthofcontent || list->flag == ' ')
 			list->widthofline++;
 	}
-
 	if ((list->flag == '-' || list->flag2 == '-') && (list->width > list->widthofcontent))
 		di_print_with_minus(list, x);
 	else if (list->precision > list->len_of_x - 1)

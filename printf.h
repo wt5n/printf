@@ -20,7 +20,7 @@ typedef	struct 	s_printf
 	char		*f_copy;
 	size_t		width;
 	size_t		precision;
-	char		length[2];
+	char		length[3];
 	char		type;
 	size_t		widthofline;
 	size_t		widthofcontent;

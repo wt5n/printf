@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 17:47:52 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/02/16 21:19:31 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/02/19 20:54:10 by hlikely          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
-/*
-t_printf	*flag(t_printf *list)
+
+/*t_printf	*flag(t_printf *list)
 {
 	if (list->f_copy[list->i] == '+')
 	{
@@ -45,8 +45,8 @@ t_printf	*flag(t_printf *list)
 	if (list->flag2 != 'Q')
 		list->i++;
 	return (width(list));
-}
-*/
+}*/
+
 t_printf	*flag(t_printf *list)
 {
 	char	fff[5] = "QQQQ\0";

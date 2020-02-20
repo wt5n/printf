@@ -9,6 +9,8 @@ void	reset_list(t_printf *list)
 	list->width = 0;
 	list->precision = 0;
 	list->length[0] = 'Q';
+	list->length[1] = '\0';
+	list->length[2] = '\0';
 	list->type = 'Q';
 	list->widthofline = 0;
 	list->widthofcontent = 0;
@@ -48,6 +50,8 @@ t_printf	*newlist_with_printf(t_printf *list)
 	list->width = 0;
 	list->precision = 0;
 	list->length[0] = 'Q';
+	list->length[1] = '\0';
+	list->length[2] = '\0';
 	list->type = 'Q';
 	list->widthofline = 0;
 	list->widthofcontent = 0;
