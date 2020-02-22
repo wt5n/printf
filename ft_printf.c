@@ -61,7 +61,7 @@ t_printf	*newlist_with_printf(t_printf *list)
 	list->nw = 'n';
 	list->i = 0;
 	list->types = "aAcCeEgGsSnpdDifFuUoxX%";
-	list->cons = "-+ 0#";
+	list->cons = "+- #0";
 	list->args = "lhjz";
 	list->len_of_x = 0;
 	return (list);
@@ -79,7 +79,7 @@ void	display(t_printf *list)
 		type_s(list);
 	else if (list->type == 'u' || list->type == 'U')
 		type_u(list);
-	else if (list->type == 'x' || list->type == 'X' || list->type == 'o')
+	else if (list->type == 'x' || list->type == 'X')
 		type_x_and_X(list);
 	else if (list->type == 'o')
 		type_o(list);

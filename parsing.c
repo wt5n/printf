@@ -6,7 +6,7 @@
 /*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 17:47:52 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/02/19 20:54:10 by hlikely          ###   ########.fr       */
+/*   Updated: 2020/02/21 20:17:19 by hlikely          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,120 +14,55 @@
 
 /*t_printf	*flag(t_printf *list)
 {
-	if (list->f_copy[list->i] == '+')
+	size_t i;
+	size_t j;
+	
+	i = 0;
+	j = 0;
+	while (1)
 	{
-		list->flag = '+';
-		if (list->f_copy[list->i + 1] == '0')
-			list->flag2 = '0';
-		if (list->f_copy[list->i + 1] == '-')
-			list->flag2 = '-';
-	}
-	if (list->f_copy[list->i] == '-')
-		list->flag = '-';
-	if (list->f_copy[list->i] == '#')
-		list->flag = '#';
-	if (list->f_copy[list->i] == '0')
-	{
-		list->flag = '0';
-		//flag '0' is ignored when flag '-' is present
-		if (list->f_copy[list->i + 1] == '-')
+		if (list->cons[i] == list->f_copy[list->i])
 		{
-			list->flag = '-';
+			list->flags[j] = list->f_copy[list->i];
 			list->i++;
+			j++;
+			i = 0;
 		}
-		if (list->f_copy[list->i + 1] == '+')
-			list->flag2 = '+';
+		if (ft_strchr(list->cons, list->f_copy[list->i]) == NULL)
+			break;
+		i++;
 	}
-	if (list->f_copy[list->i] == ' ')
-		list->flag = ' ';
-	if (list->flag != 'Q')
-		list->i++;
-	if (list->flag2 != 'Q')
-		list->i++;
 	return (width(list));
 }*/
 
 t_printf	*flag(t_printf *list)
 {
-	char	fff[5] = "QQQQ\0";
-	int		i;
-	int		x;
-	int		j;
-	
-	x = 0;
-	j = 0;
-	while (j < 5)
+	size_t i;
+
+	i = 0;
+	while (list->cons[i] != '\0')
 	{
-		i = 0;
-		while (i < 5)
+		while (list->cons[i] == list->f_copy[list->i])
 		{
-			if (list->cons[i] == list->f_copy[list->i])
-			{
-				fff[x] = list->cons[i];
-				x++;
-				list->i++;
-			}
-			i++;
+			while (list->f_copy[list->i] == '+' && list->i++)
+				list->flags[0] = '+';
+			while (list->f_copy[list->i] == '-' && list->i++)
+				list->flags[1] = '-';
+			while (list->f_copy[list->i] == ' ' && list->i++)
+				list->flags[2] = ' ';
+			while (list->f_copy[list->i] == '#' && list->i++)
+				list->flags[3] = '#';
+			while (list->f_copy[list->i] == '0' && list->i++)
+				list->flags[4] = '0';
+			i = 0;
 		}
-		j++;
-	}
-	if (fff[0] == ' ' && fff[1] == '0' && fff[2] == '+' && fff[3] == '-')
-	{
-		list->flag = '+';
-		list->flag2 = '-';
-	}
-	if (fff[0] == '0' && fff[1] == '+' && fff[2] == '-')
-	{
-		list->flag = '+';
-		list->flag2 = '-';
-	}
-	else if (fff[0] == ' ' && fff[1] == '+' && fff[2] == '0')
-	{
-		list->flag = '+';
-		list->flag2 = '0';
-	}
-	else if (fff[0] == ' ' && fff[1] == '+' && fff[2] == '-')
-	{
-		list->flag = '+';
-		list->flag2 = '-';
-	}
-	else if (fff[0] == ' ' && fff[1] == '0' && fff[2] == '-')
-	{
-		list->flag = ' ';
-		list->flag2 = '-';
-	}
-	else if (fff[0] == ' ' && fff[1] == '0' && fff[2] == '+')
-	{
-		list->flag = '0';
-		list->flag2 = '+';
-	}
-	else if (fff[0] == ' ' && fff[1] == '0' && fff[2] == '+')
-	{
-		list->flag = '0';
-		list->flag2 = '+';
-	}
-	else if (fff[0] == '0' && fff[1] == '-')
-		list->flag = '-';
-	else if (fff[0] == ' ' && fff[1] == '+')
-		list->flag = '+';
-	else
-	{
-		list->flag = fff[0];
-		list->flag2 = fff[1];
+		i++;
 	}
 	return (width(list));
 }
 
 t_printf	*width(t_printf *list)
 {
-	/*
-	while (list->f_copy[list->i] >= '0' && list->f_copy[list->i] <= '9')
-	{
-		list->width *= 10;
-		list->width += (list->f_copy[list->i] - 48);
-		list->i++;
-	}
-	*/
 	int	num;
 	
 	if (list->f_copy[list->i] >= '0' && list->f_copy[list->i] <= '9')
