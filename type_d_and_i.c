@@ -58,25 +58,6 @@ void	di_print_with_minus(t_printf *list, long long x)
 		ft_putchar_cow(' ', list);
 		list->widthofline--;
 	}
-	/*
-	while (list->widthofline > 0)
-	{
-		while (list->widthofcontent)
-		{
-			if (list->flag == '+' && (int)x >= 0)
-			{
-					ft_putchar_cow('+', list);
-					list->widthofline--;
-					list->widthofcontent--;
-			}
-			ft_putstr_cow(ft_itoa(x), list);
-			list->widthofline -= ft_len_of_int(x);
-			list->widthofcontent -= ft_len_of_int(x);
-		}
-		ft_putchar_cow(' ', list);
-		list->widthofline--;
-	}
-	*/
 }
 
 void	presicion_over_len(t_printf *list, long long x)
@@ -196,8 +177,6 @@ void	d_and_i(t_printf *list)
 	{
 		if (list->flags[0] == '+')
 			list->widthofcontent++;
-		//if (list->flags[0] == '+' && list->flags[2] == ' ')
-			//list->widthofline = list->widthofcontent;
 		if (list->widthofline < list->widthofcontent || list->flags[2] == ' ')
 			list->widthofline++;
 	}

@@ -4,8 +4,6 @@
 
 void	reset_list(t_printf *list)
 {
-	list->flag = 'Q';
-	list->flag2 = 'Q';
 	list->width = 0;
 	list->precision = 0;
 	list->length[0] = 'Q';
@@ -45,8 +43,6 @@ int		init(t_printf *list)
 
 t_printf	*newlist_with_printf(t_printf *list)
 {
-	list->flag = 'Q';
-	list->flag2 = 'Q';
 	list->width = 0;
 	list->precision = 0;
 	list->length[0] = 'Q';
