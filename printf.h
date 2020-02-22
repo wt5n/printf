@@ -15,8 +15,6 @@
 typedef	struct 	s_printf
 {
 	const char	*format;
-	char		flag;
-	char		flag2;
 	char		flags[6];
 	char		*f_copy;
 	size_t		width;
