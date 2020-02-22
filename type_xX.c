@@ -12,14 +12,16 @@ void	sharp_x(t_printf *list)
 	else if (list->flags[3] == '#' && list->type == 'x')
 	{
 		ft_putstr_cow("0x", list);
-		if (list->widthofline > 2 && list->widthofline > list->widthofcontent + 1)
-			list->widthofline -= 2;
+		list->widthofline -= 2;
+		list->widthofcontent -= 2;
+		list->len_of_x -=2;
 	}
 	else if (list->flags[3] == '#' && list->type == 'X')
 	{
 		ft_putstr_cow("0X", list);
-		if (list->widthofline > 2 && list->widthofline > list->widthofcontent + 1)
-			list->widthofline -= 2;
+		list->widthofline -= 2;
+		list->widthofcontent -= 2;
+		list->len_of_x -=2;
 	}
 }
 
@@ -35,6 +37,8 @@ void	x_print_with_minus(t_printf *list, long long x)
 	{
 		ft_putchar_cow('0', list);
 		list->precision--;
+		list->widthofline--;
+		//list->widthofcontent--;
 	}
 	if (list->len_of_x > 0)
 	{
@@ -43,7 +47,7 @@ void	x_print_with_minus(t_printf *list, long long x)
 		list->widthofline -= lennum_base(x, list->base);
 		list->widthofcontent -= lennum_base(x, list->base);
 	}
-	while (list->widthofline > list->widthofcontent)
+	while (list->widthofline > 0)
 	{
 		ft_putchar_cow(' ', list);
 		list->widthofline--;
@@ -52,9 +56,14 @@ void	x_print_with_minus(t_printf *list, long long x)
 
 void	x_presicion_over_len(t_printf *list, long long x)
 {
-	if (list->flags[3] == '#' && list->len_of_x > 0 && x != 0)
-		list->widthofline -= 2;
-	while (list->widthofline > list->widthofcontent)
+	//if (list->flags[3] == '#' && list->len_of_x > 0 && x != 0)
+	//	list->widthofline -= 2;
+	if (list->flags[3] == '#' && x != 0)
+	{
+		list->widthofcontent += 2;
+		//list->widthofline += 2;
+	}
+	while (list->widthofline > list->widthofcontent )
 	{
 		ft_putchar_cow(' ', list);
 		list->widthofline--;
@@ -78,7 +87,8 @@ void	x_print_without_minus(t_printf *list, long long x)
 		//if (list->width < list->len_of_x && )
 		x != 0 \
 		)
-		list->widthofline -= 2;
+		//list->widthofline -= 2;
+		;
 
 	while (list->widthofline > list->widthofcontent && \
 		((list->precision < list->len_of_x && list->np == 'n') || \
@@ -124,10 +134,13 @@ void	type_x_and_X(t_printf *list)
 	if (list->precision == 0 && list->np == 'n')
 		list->len_of_x = 0;
 
-	if ( list->len_of_x > 0 && list->len_of_x != 0 && list->len_of_x + 2 > list->width && \
-		(list->flags[3] == '#') && x != 0)
-		list->widthofline =list->len_of_x + 2;
-	else if (list->width > list->len_of_x)
+	//if ( list->len_of_x > 0 && list->len_of_x != 0 && list->len_of_x + 2 > list->width && \
+	//	(list->flags[3] == '#') && x != 0)
+	//	list->widthofline =list->len_of_x + 2;
+	if ((list->flags[3] == '#') && x != 0)
+		list->len_of_x += 2;
+
+	if (list->width > list->len_of_x)
 		list->widthofline = list->width;
 	else
 	{
