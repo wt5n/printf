@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 14:34:15 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/02/16 12:23:16 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/02/22 17:15:27 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	type_s(t_printf *list)
 		list->widthofline = list->precision;
 	else
 		list->widthofline = list->len_of_x;
-	
+
 	if (list->nw == 'y' && list->precision == 0 && list->np == 'n')
 	{
 		list->widthofcontent = 0;
@@ -80,9 +80,9 @@ void	type_s(t_printf *list)
 		list->widthofcontent = 0;
 	else if (list->precision < list->len_of_x && list->np == 'n')
 		list->widthofcontent = list->precision;
-	else 
+	else
 		list->widthofcontent = list->len_of_x;
-	if ((list->flag == '-') && (list->width > list->widthofcontent))
+	if ((list->flags[1] == '-') && (list->width > list->widthofcontent))
 		str_print_with_minus(list, str);
 	else
 		str_print_without_minus(list, str);

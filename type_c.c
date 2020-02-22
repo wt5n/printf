@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type_c.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 19:02:52 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/01/23 17:40:23 by marvin           ###   ########.fr       */
+/*   Updated: 2020/02/22 17:14:52 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	c_width_minus(t_printf *list, unsigned int c)
 
 void	c_width(t_printf *list, unsigned int c)
 {
-	if (list->flag == '-')
+	if (list->flags[1] == '-')
 		c_width_minus(list, c);
 	else
 	{

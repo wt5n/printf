@@ -91,5 +91,6 @@ void 			change_length_u_x(t_printf *list, long long x);
 void 			change_length_f_e_a_g(t_printf *list, double x);
 
 void			type_o(t_printf *list);
+void			sharp_x(t_printf *list);
 
 #endif

@@ -4,7 +4,7 @@ void	u_print_with_minus(t_printf *list, long long x)
 {
 	if (list->len_of_x > 0)
 		list->len_of_x = ft_len_of_int(x);
-	
+
 	while (list->precision > list->len_of_x)
 	{
 		ft_putchar_cow('0', list);
@@ -12,7 +12,7 @@ void	u_print_with_minus(t_printf *list, long long x)
 	}
 	if (list->len_of_x > 0)
 	{
-		ft_putstr_cow(ft_itoa(x), list);
+		ft_putstr_cow(adv_ft_itoa(x, 10, 'a'), list);
 		list->widthofline -= list->len_of_x;
 		list->widthofcontent -= list->len_of_x;
 	}
@@ -36,41 +36,50 @@ void	u_presicion_over_len(t_printf *list, long long x)
 		list->widthofcontent--;
 	}
 	if (list->len_of_x > 0)
-		ft_putstr_cow(ft_itoa(x), list);
+		ft_putstr_cow(adv_ft_itoa(x, 10, 'a'), list);
 }
 
 void	u_print_without_minus(t_printf *list, long long x)
 {
 	while (list->widthofline > list->widthofcontent && \
 		((list->precision < list->len_of_x && list->np == 'n') || \
-		(list->flag != '0' && list->flag2 != '0')))
+		(list->flags[4] != '0' )))
 	{
 		ft_putchar_cow(' ', list);
 		list->widthofline--;
 	}
 	while (list->widthofline > list->widthofcontent)
 	{
-		if (list->flag == '0' || list->flag2 == '0')
+		if (list->flags[4] == '0')
 			ft_putchar_cow('0', list);
 		else
 			ft_putchar_cow(' ', list);
 		list->widthofline--;
 	}
 	if (list->len_of_x > 0)
-		ft_putstr_cow(ft_itoa(x), list);
+		ft_putstr_cow(adv_ft_itoa(x, 10, 'a'), list);
 }
 
 void	type_u(t_printf *list)
 {
-	long long x;
+	uintmax_t x;
 
-	x = va_arg(list->ap, long long);
+	if (ft_strcmp(list->length,"l") == 0)
+		x = (unsigned long)va_arg(list->ap, unsigned long int);
+	else if (ft_strcmp(list->length,"ll") == 0)
+		x = (unsigned long long)va_arg(list->ap, unsigned long long int);
+	else if (ft_strcmp(list->length,"hh") == 0)
+		x = (unsigned char)va_arg(list->ap, unsigned int);
+	else if (ft_strcmp(list->length,"h") == 0)
+		x = (unsigned short)va_arg(list->ap, unsigned int);
+	else
+		x = (unsigned int)va_arg(list->ap, unsigned long int);
+
+	x = (uintmax_t)x;
+
 	list->len_of_x = ft_len_of_int(x);
 	if (list->precision == 0 && list->np == 'n')
 		list->len_of_x = 0;
-
-	if (x < 0)
-		ft_putstr_cow("4294967269", list);
 
 	if (list->width > list->len_of_x)
 		list->widthofline = list->width;
@@ -86,9 +95,9 @@ void	type_u(t_printf *list)
 		list->widthofcontent = list->len_of_x;
 	else
 		list->widthofcontent = list->precision;
-	
-	if ((list->flag == '-') && (list->width > list->widthofcontent))
-		u_print_with_minus(list, x);	
+
+	if ((list->flags[1] == '-') && (list->width > list->widthofcontent))
+		u_print_with_minus(list, x);
 	else if (list->precision > list->len_of_x - 1)
 		u_presicion_over_len(list, x);
 	else

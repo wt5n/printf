@@ -87,7 +87,6 @@ void	display(t_printf *list)
 		type_p(list);
 	else
 		ft_putstr_cow(list->f_copy, list);
-		//ft_putchar_cow(list->f_copy[i], list);
 }
 
 int		ft_printf(const char *format, ...)
