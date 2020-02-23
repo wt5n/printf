@@ -75,7 +75,8 @@ void	rounding(unsigned long long *arr, int i, int np)
 	int 	x;
 
 	x = 1;
-	//printf("\nini:%d\n", i);
+	printf("\nbefore :%llu %d\n", arr[i], i);
+	printf("ini:%d\n", i);
 	if (np > 10)
 	{
 		np -= 10;
@@ -84,7 +85,33 @@ void	rounding(unsigned long long *arr, int i, int np)
 	while (np--)
 		x *= 10;
 	addit(arr, i, x);
-	//printf("\nafter :%llu %d\n", arr[i], i);
+	printf("after :%llu %d\n", arr[i], i);
+}
+
+void	rounding2(unsigned long long *arr, int i, int precision)
+{
+	printf("incoming i:%d\n", i);
+	i++;
+	printf("j:%llu\n", arr[i]);
+	//while (i < 10)
+	//{
+	printf("i:%llu", arr[i]);
+	int delim = 10 * precision;
+	delim = 1000000000;
+	printf("%llu", arr[i] / delim);
+	//	i++;
+	//}
+	printf("\n");
+	while (arr[i] >= 5)
+	{
+		while (i < 10)
+		{
+			arr[i] = 0;
+			arr[i+1] += 1;
+			i++;
+		}
+		i = 0;
+	}
 }
 
 void	ap_number(t_double d1 ,unsigned long long *arr, int countofel, int pow)
@@ -158,7 +185,7 @@ char	*handling_float(double d, int countofel, int pow, t_printf *list)
 	//printf("m:%llu e:%llu\n", d1.part.m, d1.part.e);
 	arr = (unsigned long long*)malloc(sizeof(unsigned long long) * countofel);
 	ap_number(d1, arr, countofel, pow);
-/*
+
 	int j;
 	i = 0;
 	while (i < countofel)
@@ -173,7 +200,7 @@ char	*handling_float(double d, int countofel, int pow, t_printf *list)
         i++;
     }
 	printf("\n");
-*/
+
 	i = 0;
 	while (arr[i] == 0 && n > 10)
 	{
@@ -181,7 +208,8 @@ char	*handling_float(double d, int countofel, int pow, t_printf *list)
 		n -= 10;
 	}
 	if (list->precision)
-		rounding(arr, i, n + list->precision + 1);
+		//rounding(arr, i, n + list->precision + 1);
+		rounding2(arr, i, list->precision);
 	//printf("n:%d\n", n);
 	//printf("\nouti:%d\n", i);
 	tmp = full_str(adv_ft_itoa(arr[i], 10, 'a'));
