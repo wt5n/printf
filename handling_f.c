@@ -5,10 +5,42 @@
 
 #include "printf.h"
 
-size_t	ft_strlen(const char *s);
-void	ft_putchar(char c);
-char	*adv_ft_itoa(long long n, int base, char c);
-int		lennum(long long n);
+void	divis(unsigned long long *arr, int i, int num)
+{
+	unsigned long long res;
+	unsigned long long cell;
+	unsigned long long x;
+	int end;
+
+	x = 10000000000;
+	end = i;
+	res = 0;
+	i = 0;
+	while (arr[i] == 0 && i < end)
+		i++;
+	cell = arr[i];
+	while (i <= end)
+	{
+		res = (cell / num);
+		cell = ((arr[i] % num) * x) + arr[i + 1];
+		arr[i] = res;
+		i++;
+	}
+}
+
+int		findfirstel(unsigned long long *arr, int end)
+{
+	int i;
+
+	i = 0;
+	while (i < end)
+	{
+		if (arr[i] != 0)
+			return (i);
+		i++;
+	}
+	return (end);
+}
 
 char	*full_str(char *str)
 {
@@ -73,14 +105,33 @@ void	ap_number(t_double d1 ,unsigned long long *arr, int countofel, int pow)
 	}
 	addit(arr, 9, 100);
 	pow = d1.part.e - 1023;
-	while (pow)
+	//printf("pow2:%d\n", pow);
+	if (pow > 0)
 	{
-		mult(arr, 0, 2, countofel);
-		pow--;
+		while (pow)
+		{
+			mult(arr, 0, 2, countofel);
+			pow--;
+		}
+	}
+	else
+	{
+		while (pow < 0)
+		{
+			mult(arr, 0, 5, countofel);
+			pow++;
+		}
+		
+		while (pow < ((d1.part.e - 1023) * -1))
+		{
+			divis(arr, 15, 10);
+			pow++;
+		}
+		
 	}
 }
 
-int		handling_float(double d, int countofel, int pow, int p, t_printf *list)
+char	*handling_float(double d, int countofel, int pow, t_printf *list)
 {
 	t_double 			d1;
 	unsigned long long 	*arr;
@@ -88,11 +139,17 @@ int		handling_float(double d, int countofel, int pow, int p, t_printf *list)
 	char 				*tmp;
 	int 				n;
 	int 				iszero;
+	int					lessone;
 
 	iszero = 0;
+	lessone = 0;
 	n = 98;
 	i = 0;
-	if ((int)d == 0)
+	if (d < 1)
+	{
+		lessone = 1;
+	}
+	if (d == 0)
 	{
 		d += 1;
 		iszero = 1;
@@ -101,7 +158,7 @@ int		handling_float(double d, int countofel, int pow, int p, t_printf *list)
 	//printf("m:%llu e:%llu\n", d1.part.m, d1.part.e);
 	arr = (unsigned long long*)malloc(sizeof(unsigned long long) * countofel);
 	ap_number(d1, arr, countofel, pow);
-	/*
+/*
 	int j;
 	i = 0;
 	while (i < countofel)
@@ -112,28 +169,35 @@ int		handling_float(double d, int countofel, int pow, int p, t_printf *list)
 			printf("0");
 			j++;
 		}
-        printf("%I64d", arr[i]);
+        printf("%llu", arr[i]);
         i++;
     }
 	printf("\n");
-	*/
+*/
 	i = 0;
 	while (arr[i] == 0 && n > 10)
 	{
 		i++;
 		n -= 10;
 	}
-	if (p)
-		rounding(arr, i, n + p + 1);
+	if (list->precision)
+		rounding(arr, i, n + list->precision + 1);
 	//printf("n:%d\n", n);
 	//printf("\nouti:%d\n", i);
 	tmp = full_str(adv_ft_itoa(arr[i], 10, 'a'));
 	//printf("tmp:%s\n", tmp);
-	while (*tmp == '0')
+	while (*tmp == '0' && n > 1)
 	{
 		tmp++;
 		n--;
 	}
+	/*
+	if (lessone)
+	{
+		ft_putchar_cow('0', list);
+		tmp++;
+	}
+	*/
 	if (iszero)
 	{
 		ft_putchar_cow('0', list);
@@ -146,9 +210,9 @@ int		handling_float(double d, int countofel, int pow, int p, t_printf *list)
 	while (n--)
 		ft_putchar_cow(*tmp++, list);
 	//printf("\nbefore:%llu %d\n", arr[i], i);
-	if (p)
+	if (list->precision)
 		ft_putchar_cow('.', list);
-	while (p--)
+	while (list->precision--)
 	{
 		if (!*tmp)
 		{
@@ -157,5 +221,6 @@ int		handling_float(double d, int countofel, int pow, int p, t_printf *list)
 		}
 		ft_putchar_cow(*tmp++, list);
 	}
-	return (0);
+	//ft_putstr_cow(tmp, list);
+	return (tmp);
 }

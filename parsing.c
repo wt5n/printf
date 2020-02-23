@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 17:47:52 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/02/21 20:17:19 by hlikely          ###   ########.fr       */
+/*   Updated: 2020/02/23 15:09:40 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 {
 	size_t i;
 	size_t j;
-	
+
 	i = 0;
 	j = 0;
 	while (1)
@@ -64,7 +64,7 @@ t_printf	*flag(t_printf *list)
 t_printf	*width(t_printf *list)
 {
 	int	num;
-	
+
 	if (list->f_copy[list->i] >= '0' && list->f_copy[list->i] <= '9')
 	{
 		num = ft_atoi(&list->f_copy[list->i]);
@@ -77,7 +77,7 @@ t_printf	*width(t_printf *list)
 	}
 	else
 		list->nw = 'y';
-	
+
 	return (precision(list));
 }
 
@@ -94,9 +94,9 @@ t_printf	*precision(t_printf *list)
 			list->i++;
 		}
 	}
-	else 
+	else
 		list->np = 'y';
-	
+
 	return (length(list));
 }
 
@@ -135,12 +135,12 @@ t_printf	*type(t_printf *list)
 			break ;
 		}
 		i++;
-		if (list->type == 'x' || list->type == 'X')
-			list->base = 16;
-		if (list->type == 'o')
-			list->base = 8;
-		if (list->np == 'y' && (list->type == 'f' || list->type == 'F'))
-			list->precision = 6;
 	}
+	if (list->type == 'x' || list->type == 'X')
+		list->base = 16;
+	else if (list->type == 'o')
+		list->base = 8;
+	else if (list->np == 'y' && (list->type == 'f' || list->type == 'F'))
+		list->precision = 6;
 	return (list);
 }

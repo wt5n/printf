@@ -78,7 +78,7 @@ void			x_print_with_minus(t_printf *list, long long x);
 char			*adv_ft_itoa(long long n, int base, char c);
 size_t			lennum_base(long long n, int base);
 void			type_f_and_F(t_printf *list);
-int				handling_float(double d, int countofel, int pow, int p, t_printf *list);
+char			*handling_float(double d, int countofel, int pow, t_printf *list);
 char			*nole(void);
 void			ft_putchar_cow(char c, t_printf *list);
 void			ft_putstr_cow(char const *s, t_printf *list);
@@ -90,5 +90,7 @@ void 			change_length_f_e_a_g(t_printf *list, double x);
 
 void			type_o(t_printf *list);
 void			sharp_x(t_printf *list);
+void	divis(unsigned long long *arr, int i, int num);
+int		lennum(long long n);
 
 #endif

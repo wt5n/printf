@@ -268,25 +268,4 @@ void	subst(unsigned long long *arr, int i, unsigned long long num, int end)
 		arr[i] = res;
 }
 
-void	divis(unsigned long long *arr, int i, int num)
-{
-	unsigned long long res;
-	unsigned long long cell;
-	unsigned long long x;
-	int end;
 
-	x = 10000000000;
-	end = i;
-	res = 0;
-	i = 0;
-	while (arr[i] == 0 && i < end)
-		i++;
-	cell = arr[i];
-	while (i <= end)
-	{
-		res = (cell / num);
-		cell = ((arr[i] % num) * x) + arr[i + 1];
-		arr[i] = res;
-		i++;
-	}
-}
