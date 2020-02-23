@@ -10,6 +10,11 @@ void	reset_list(t_printf *list)
 	list->length[1] = '\0';
 	list->length[2] = '\0';
 	list->type = 'Q';
+	list->flags[0] = '\0';
+	list->flags[1] = '\0';
+	list->flags[2] = '\0';
+	list->flags[3] = '\0';
+	list->flags[4] = '\0';
 	list->widthofline = 0;
 	list->widthofcontent = 0;
 	list->base = 10;
@@ -82,7 +87,7 @@ void	display(t_printf *list)
 	else if (list->type == 'p')
 		type_p(list);
 	else
-		ft_putstr_cow(list->f_copy, list);
+		type_other(list);
 }
 
 int		ft_printf(const char *format, ...)

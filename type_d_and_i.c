@@ -173,13 +173,18 @@ void	d_and_i(t_printf *list)
 	else
 		list->widthofcontent = list->precision;
 	
-	if (((list->flags[0] == '+'|| (list->flags[2] == ' ' && (list->len_of_x + 1 > list->width))) && x >= 0))
+	if (list->flags[0] == '+' && x >= 0)
 	{
-		if (list->flags[0] == '+')
+		if (list->np == 'n' && list->precision > 0)
 			list->widthofcontent++;
-		if (list->widthofline < list->widthofcontent || list->flags[2] == ' ')
-			list->widthofline++;
+		else if (list->widthofline > list->widthofcontent)
+			list->widthofcontent++;
 	}
+
+	while (list->widthofline <= list->widthofcontent && list->flags[2] == ' ' && x >= 0)
+			list->widthofline++;
+
+	
 	if ((list->flags[1] == '-') && (list->width > list->widthofcontent))
 		di_print_with_minus(list, x);
 	else if (list->precision > list->len_of_x - 1)

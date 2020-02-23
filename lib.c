@@ -138,25 +138,6 @@ int							ft_atoi(const char *str)
 	return (((int)res) * sign);
 }
 
-int		lennum(long long n)
-{
-	int	i;
-
-	i = 0;
-	if (n < 0)
-	{
-		i++;
-		n *= -1;
-	}
-	while (n >= 10)
-	{
-		n /= 10;
-		i++;
-	}
-	i++;
-	return (i);
-}
-
 char	*minimum(void)
 {
 	int					i;
@@ -266,6 +247,41 @@ void	subst(unsigned long long *arr, int i, unsigned long long num, int end)
 	}
 	else
 		arr[i] = res;
+}
+
+void	*ft_memset(void *b, int c, size_t len)
+{
+	unsigned char	*d;
+	size_t			i;
+
+	i = 0;
+	d = (unsigned char*)b;
+	while (i < len)
+	{
+		d[i] = (char)c;
+		i++;
+	}
+	return (b);
+}
+
+char	*ft_strnew(size_t size)
+{
+	char	*res;
+	size_t	i;
+
+	i = 0;
+	if (size + 1 < size)
+		return (0);
+	res = (char*)malloc(sizeof(char) * (size + 1));
+	if (!res)
+		return (NULL);
+	while (i < size)
+	{
+		res[i] = '\0';
+		i++;
+	}
+	res[i] = '\0';
+	return (res);
 }
 
 

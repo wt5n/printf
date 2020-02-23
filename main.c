@@ -9,11 +9,11 @@ int		main(void)
 	printf("\n");
 
 
-	cow = printf("%.4f", 0.0894255);
+	cow = printf("%.5f", 0.0894255);
 
 	printf("\n");
 
-	cow2 = ft_printf("%.4f", 0.0894255);
+	cow2 = ft_printf("%.5f", 0.0894255);
 
 	printf("\ncow :%d\ncow2:%d\n", cow, cow2);
 

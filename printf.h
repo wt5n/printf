@@ -92,5 +92,7 @@ void			type_o(t_printf *list);
 void			sharp_x(t_printf *list);
 void	divis(unsigned long long *arr, int i, int num);
 int		lennum(long long n);
+void    type_other(t_printf *list);
+void	display_gap(t_printf *list, char c, int len, int update_len);
 
 #endif

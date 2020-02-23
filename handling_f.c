@@ -5,6 +5,25 @@
 
 #include "printf.h"
 
+int		lennum(long long n)
+{
+	int	i;
+
+	i = 0;
+	if (n < 0)
+	{
+		i++;
+		n *= -1;
+	}
+	while (n >= 10)
+	{
+		n /= 10;
+		i++;
+	}
+	i++;
+	return (i);
+}
+
 void	divis(unsigned long long *arr, int i, int num)
 {
 	unsigned long long res;
@@ -75,8 +94,8 @@ void	rounding(unsigned long long *arr, int i, int np)
 	int 	x;
 
 	x = 1;
-	printf("\nbefore :%llu %d\n", arr[i], i);
-	printf("ini:%d\n", i);
+	//printf("\nbefore :%llu %d\n", arr[i], i);
+	//printf("ini:%d\n", i);
 	if (np > 10)
 	{
 		np -= 10;
@@ -85,23 +104,23 @@ void	rounding(unsigned long long *arr, int i, int np)
 	while (np--)
 		x *= 10;
 	addit(arr, i, x);
-	printf("after :%llu %d\n", arr[i], i);
+	//printf("after :%llu %d\n", arr[i], i);
 }
 
 void	rounding2(unsigned long long *arr, int i, int precision)
 {
-	printf("incoming i:%d\n", i);
+	//printf("incoming i:%d\n", i);
 	i++;
-	printf("j:%llu\n", arr[i]);
+	//printf("j:%llu\n", arr[i]);
 	//while (i < 10)
 	//{
-	printf("i:%llu", arr[i]);
+	//printf("i:%llu", arr[i]);
 	int delim = 10 * precision;
 	delim = 1000000000;
-	printf("%llu", arr[i] / delim);
+	//printf("%llu", arr[i] / delim);
 	//	i++;
 	//}
-	printf("\n");
+	//printf("\n");
 	while (arr[i] >= 5)
 	{
 		while (i < 10)
@@ -185,7 +204,7 @@ char	*handling_float(double d, int countofel, int pow, t_printf *list)
 	//printf("m:%llu e:%llu\n", d1.part.m, d1.part.e);
 	arr = (unsigned long long*)malloc(sizeof(unsigned long long) * countofel);
 	ap_number(d1, arr, countofel, pow);
-
+/*
 	int j;
 	i = 0;
 	while (i < countofel)
@@ -200,7 +219,7 @@ char	*handling_float(double d, int countofel, int pow, t_printf *list)
         i++;
     }
 	printf("\n");
-
+*/
 	i = 0;
 	while (arr[i] == 0 && n > 10)
 	{
