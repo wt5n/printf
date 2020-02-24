@@ -6,35 +6,12 @@
 /*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:26:55 by hlikely           #+#    #+#             */
-/*   Updated: 2020/02/24 17:12:26 by hlikely          ###   ########.fr       */
+/*   Updated: 2020/02/24 21:07:50 by hlikely          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 #include <limits.h>
-
-void		di_print_without_minus(t_printf *list, long long x)
-{
-	if ((list->flags[2] == ' ') && list->width >= list->len_of_x && (int)x >= 0)
-	{
-		ft_putchar_cow(' ', list);
-		list->widthofline--;
-	}
-	while (list->widthofline > list->widthofcontent && \
-		((list->precision < list->len_of_x && list->np == 'n') || \
-		(list->flags[4] != '0')))
-	{
-		ft_putchar_cow(' ', list);
-		list->widthofline--;
-	}
-	if ((list->flags[0] == '+') && x >= 0)
-	{
-		ft_putchar_cow('+', list);
-		list->widthofline--;
-		list->widthofcontent--;
-	}
-	di_print_without_minus1(list, x);
-}
 
 static void	di_print_without_minus1(t_printf *list, long long x)
 {
@@ -57,6 +34,29 @@ static void	di_print_without_minus1(t_printf *list, long long x)
 	}
 	if (list->len_of_x > 0)
 		ft_putstr_cow(adv_ft_itoa(x, 10, 'a'), list);
+}
+
+void		di_print_without_minus(t_printf *list, long long x)
+{
+	if ((list->flags[2] == ' ') && list->width >= list->len_of_x && (int)x >= 0)
+	{
+		ft_putchar_cow(' ', list);
+		list->widthofline--;
+	}
+	while (list->widthofline > list->widthofcontent && \
+		((list->precision < list->len_of_x && list->np == 'n') || \
+		(list->flags[4] != '0')))
+	{
+		ft_putchar_cow(' ', list);
+		list->widthofline--;
+	}
+	if ((list->flags[0] == '+') && x >= 0)
+	{
+		ft_putchar_cow('+', list);
+		list->widthofline--;
+		list->widthofcontent--;
+	}
+	di_print_without_minus1(list, x);
 }
 
 static void	one_more_func(t_printf *list, intmax_t x)
