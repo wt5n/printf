@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/24 16:25:19 by hlikely           #+#    #+#             */
+/*   Updated: 2020/02/24 16:26:16 by hlikely          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdarg.h>
 #include <stdlib.h>
 #include "printf.h"
 
-void	reset_list(t_printf *list)
+void		reset_list(t_printf *list)
 {
 	list->width = 0;
 	list->precision = 0;
@@ -23,7 +35,7 @@ void	reset_list(t_printf *list)
 	list->len_of_x = 0;
 }
 
-int		init(t_printf *list)
+int			init(t_printf *list)
 {
 	if (ft_strcmp(list->f_copy, "%") == 0)
 		return (0);
@@ -63,15 +75,15 @@ t_printf	*newlist_with_printf(t_printf *list)
 	list->i = 0;
 	list->types = "aAcCeEgGsSnpdDifFuUoxX%";
 	list->cons = "+- #0";
-	list->args = "lhjz";
+	list->args = "lhjzL";
 	list->len_of_x = 0;
 	return (list);
 }
 
-void	display(t_printf *list)
+void		display(t_printf *list)
 {
 	if (list->type == 'd' || list->type == 'i' || list->type == 'D')
-		d_and_i(list);
+		type_di(list);
 	else if (list->type == 'c' || list->type == 'C')
 		type_c(list);
 	else if (list->type == 'f' || list->type == 'F')
@@ -81,7 +93,7 @@ void	display(t_printf *list)
 	else if (list->type == 'u' || list->type == 'U')
 		type_u(list);
 	else if (list->type == 'x' || list->type == 'X')
-		type_x_and_X(list);
+		type_x(list);
 	else if (list->type == 'o')
 		type_o(list);
 	else if (list->type == 'p')
@@ -90,12 +102,12 @@ void	display(t_printf *list)
 		type_other(list);
 }
 
-int		ft_printf(const char *format, ...)
+int			ft_printf(const char *format, ...)
 {
 	t_printf *list;
 
 	if (!(list = (t_printf*)malloc(sizeof(t_printf))))
-		return(-1);
+		return (-1);
 	list->format = format;
 	list = newlist_with_printf(list);
 	if (format)

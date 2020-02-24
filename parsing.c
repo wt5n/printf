@@ -3,37 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 17:47:52 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/02/23 15:09:40 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/02/24 15:21:16 by hlikely          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
-
-/*t_printf	*flag(t_printf *list)
-{
-	size_t i;
-	size_t j;
-
-	i = 0;
-	j = 0;
-	while (1)
-	{
-		if (list->cons[i] == list->f_copy[list->i])
-		{
-			list->flags[j] = list->f_copy[list->i];
-			list->i++;
-			j++;
-			i = 0;
-		}
-		if (ft_strchr(list->cons, list->f_copy[list->i]) == NULL)
-			break;
-		i++;
-	}
-	return (width(list));
-}*/
 
 t_printf	*flag(t_printf *list)
 {
@@ -77,7 +54,6 @@ t_printf	*width(t_printf *list)
 	}
 	else
 		list->nw = 'y';
-
 	return (precision(list));
 }
 
@@ -86,7 +62,6 @@ t_printf	*precision(t_printf *list)
 	if (list->f_copy[list->i] == '.')
 	{
 		list->i++;
-		//list->precision = 0;
 		while (list->f_copy[list->i] >= '0' && list->f_copy[list->i] <= '9')
 		{
 			list->precision *= 10;
@@ -96,7 +71,6 @@ t_printf	*precision(t_printf *list)
 	}
 	else
 		list->np = 'y';
-
 	return (length(list));
 }
 

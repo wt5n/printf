@@ -1,57 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type_u.c                                           :+:      :+:    :+:   */
+/*   type_di.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/24 16:17:17 by hlikely           #+#    #+#             */
-/*   Updated: 2020/02/24 16:30:46 by hlikely          ###   ########.fr       */
+/*   Created: 2020/02/24 16:26:55 by hlikely           #+#    #+#             */
+/*   Updated: 2020/02/24 17:12:26 by hlikely          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
+#include <limits.h>
 
-void		u_print_with_minus(t_printf *list, long long x)
+void		di_print_without_minus(t_printf *list, long long x)
 {
-	if (list->len_of_x > 0)
-		list->len_of_x = ft_len_of_int(x);
-	while (list->precision > list->len_of_x)
-	{
-		ft_putchar_cow('0', list);
-		list->precision--;
-	}
-	if (list->len_of_x > 0)
-	{
-		ft_putstr_cow(adv_ft_itoa(x, 10, 'a'), list);
-		list->widthofline -= list->len_of_x;
-		list->widthofcontent -= list->len_of_x;
-	}
-	while (list->widthofline > list->widthofcontent)
+	if ((list->flags[2] == ' ') && list->width >= list->len_of_x && (int)x >= 0)
 	{
 		ft_putchar_cow(' ', list);
 		list->widthofline--;
 	}
-}
-
-void		u_presicion_over_len(t_printf *list, long long x)
-{
-	while (list->widthofline > list->widthofcontent)
-	{
-		ft_putchar_cow(' ', list);
-		list->widthofline--;
-	}
-	while (list->widthofcontent > list->len_of_x)
-	{
-		ft_putchar_cow('0', list);
-		list->widthofcontent--;
-	}
-	if (list->len_of_x > 0)
-		ft_putstr_cow(adv_ft_itoa(x, 10, 'a'), list);
-}
-
-void		u_print_without_minus(t_printf *list, long long x)
-{
 	while (list->widthofline > list->widthofcontent && \
 		((list->precision < list->len_of_x && list->np == 'n') || \
 		(list->flags[4] != '0')))
@@ -59,10 +27,30 @@ void		u_print_without_minus(t_printf *list, long long x)
 		ft_putchar_cow(' ', list);
 		list->widthofline--;
 	}
+	if ((list->flags[0] == '+') && x >= 0)
+	{
+		ft_putchar_cow('+', list);
+		list->widthofline--;
+		list->widthofcontent--;
+	}
+	di_print_without_minus1(list, x);
+}
+
+static void	di_print_without_minus1(t_printf *list, long long x)
+{
 	while (list->widthofline > list->widthofcontent)
 	{
 		if (list->flags[4] == '0')
+		{
+			if (x < 0)
+			{
+				ft_putchar_cow('-', list);
+				x *= -1;
+				list->widthofcontent--;
+				list->widthofline--;
+			}
 			ft_putchar_cow('0', list);
+		}
 		else
 			ft_putchar_cow(' ', list);
 		list->widthofline--;
@@ -71,15 +59,17 @@ void		u_print_without_minus(t_printf *list, long long x)
 		ft_putstr_cow(adv_ft_itoa(x, 10, 'a'), list);
 }
 
-static void	one_more_func(t_printf *list)
+static void	one_more_func(t_printf *list, intmax_t x)
 {
+	if (list->flags[0] == '+' && list->flags[2] == ' ')
+		list->flags[2] = '\0';
 	if (list->precision == 0 && list->np == 'n')
 		list->len_of_x = 0;
 	if (list->width > list->len_of_x)
 		list->widthofline = list->width;
 	else
 	{
-		if (list->precision < list->len_of_x && list->precision > 0)
+		if (list->precision > list->len_of_x && list->precision > list->width)
 			list->widthofline = list->precision;
 		else
 			list->widthofline = list->len_of_x;
@@ -88,29 +78,39 @@ static void	one_more_func(t_printf *list)
 		list->widthofcontent = list->len_of_x;
 	else
 		list->widthofcontent = list->precision;
+	if (list->flags[0] == '+' && x >= 0)
+	{
+		if (list->np == 'n' && list->precision > 0)
+			list->widthofcontent++;
+		else if (list->widthofline > list->widthofcontent)
+			list->widthofcontent++;
+	}
 }
 
-void		type_u(t_printf *list)
+void		type_di(t_printf *list)
 {
-	uintmax_t x;
+	intmax_t x;
 
 	if (ft_strcmp(list->length, "l") == 0)
-		x = (unsigned long)va_arg(list->ap, unsigned long int);
+		x = (long)va_arg(list->ap, long int);
 	else if (ft_strcmp(list->length, "ll") == 0)
-		x = (unsigned long long)va_arg(list->ap, unsigned long long int);
+		x = (long long)va_arg(list->ap, long long int);
 	else if (ft_strcmp(list->length, "hh") == 0)
-		x = (unsigned char)va_arg(list->ap, unsigned int);
+		x = (signed char)va_arg(list->ap, int);
 	else if (ft_strcmp(list->length, "h") == 0)
-		x = (unsigned short)va_arg(list->ap, unsigned int);
+		x = (short)va_arg(list->ap, int);
 	else
-		x = (unsigned int)va_arg(list->ap, unsigned long int);
-	x = (uintmax_t)x;
+		x = (int)va_arg(list->ap, long int);
+	x = (intmax_t)x;
 	list->len_of_x = ft_len_of_int(x);
-	one_more_func(list);
+	one_more_func(list, x);
+	while (list->widthofline <= list->widthofcontent && \
+	list->flags[2] == ' ' && x >= 0)
+		list->widthofline++;
 	if ((list->flags[1] == '-') && (list->width > list->widthofcontent))
-		u_print_with_minus(list, x);
+		di_print_with_minus(list, x);
 	else if (list->precision > list->len_of_x - 1)
-		u_presicion_over_len(list, x);
+		presicion_over_len(list, x);
 	else
-		u_print_without_minus(list, x);
+		di_print_without_minus(list, x);
 }

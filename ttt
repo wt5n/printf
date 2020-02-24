@@ -1,2 +1,0 @@
-if (list->widthofline <= list->widthofcontent && list->flags[2] == ' ' && x >= 0)
-			list->widthofline++;

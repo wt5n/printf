@@ -6,19 +6,19 @@
 #    By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/16 15:45:02 by ksenaida          #+#    #+#              #
-#    Updated: 2020/02/23 19:59:17 by hlikely          ###   ########.fr        #
+#    Updated: 2020/02/24 16:15:56 by hlikely          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
 SRC1 = adv_itoa.c ap_arith.c parsing.c ft_printf.c type_other.c\
-	length.c type_c.c type_d_and_i.c ft_put_cow.c handling_f.c \
-	type_f_and_F.c type_str.c type_u.c type_xX.c type_p.c type_o.c
+	type_c.c type_di.c add_func.c handling_f.c \
+	type_f_and_F.c type_s.c type_u.c type_x.c type_p.c type_o.c
 
 OBJ1 = adv_itoa.o ap_arith.o parsing.o ft_printf.o type_other.o\
-	length.o type_c.o type_d_and_i.o ft_put_cow.o handling_f.o \
-	type_f_and_F.o type_str.o type_u.o type_xX.o type_p.o type_o.o
+	type_c.o type_di.o add_func.o handling_f.o \
+	type_f_and_F.o type_s.o type_u.o type_x.o type_p.o type_o.o
 
 HDR = printf.h
 LIBFT = libft/

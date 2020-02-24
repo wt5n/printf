@@ -9,11 +9,14 @@ int		main(void)
 	printf("\n");
 
 
-	cow = printf("%.5f", 0.0894255);
+	//cow = printf("%p", 0);
 
 	printf("\n");
 
-	cow2 = ft_printf("%.5f", 0.0894255);
+	cow2 = ft_printf("%p", 0);
+
+	// cow2 = printf("%f\n", 123456789123456789123456789.1);
+	// cow2 = ft_printf("%f\n", 123456789123456789123456789.1);
 
 	printf("\ncow :%d\ncow2:%d\n", cow, cow2);
 

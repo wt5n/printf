@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   type_other.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/24 15:17:42 by hlikely           #+#    #+#             */
+/*   Updated: 2020/02/24 16:23:10 by hlikely          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "printf.h"
 
-void	display_gap(t_printf *list, char c, int len, int update_len)
+void		display_gap(t_printf *list, char c, int len, int update_len)
 {
 	char	*str;
 
@@ -16,9 +28,9 @@ void	display_gap(t_printf *list, char c, int len, int update_len)
 	}
 }
 
-static void     type_perc(t_printf *list)
+static void	type_perc(t_printf *list)
 {
-    if (list->flags[4] == '0' && list->precision <= 0 && !list->flags[1])
+	if (list->flags[4] == '0' && list->precision <= 0 && !list->flags[1])
 	{
 		list->precision = list->width;
 		list->width = 0;
@@ -33,10 +45,10 @@ static void     type_perc(t_printf *list)
 	list->cow++;
 }
 
-void    type_other(t_printf *list)
+void		type_other(t_printf *list)
 {
-    if (list->type == '%')
-        type_perc(list);
-    else
-        ft_putstr_cow(list->f_copy, list);
+	if (list->type == '%')
+		type_perc(list);
+	else
+		ft_putstr_cow(list->f_copy, list);
 }

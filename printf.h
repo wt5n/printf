@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   printf.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/24 16:42:52 by hlikely           #+#    #+#             */
+/*   Updated: 2020/02/24 16:57:35 by hlikely          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PRINTF_H
 # define PRINTF_H
 
@@ -8,9 +20,6 @@
 # include <ctype.h>
 
 # include <stdio.h>
-# define SPECS "cspdiuoxX%"
-# define ARGS "lhjz"
-# define CONS "-+ 0#"
 
 typedef	struct 	s_printf
 {
@@ -46,53 +55,77 @@ typedef union 	s_double
 	}			part;
 }				t_double;
 
+//ft_printf
+void			display(t_printf *list);
 int				ft_printf(const char *format, ...);
 t_printf		*newlist_with_printf();
+int				init(t_printf *list);
+void			reset_list(t_printf *list);
+
+// parsing 
 t_printf		*flag(t_printf *list);
 t_printf		*width(t_printf *list);
 t_printf		*precision(t_printf *list);
 t_printf		*length(t_printf *list);
 t_printf		*type(t_printf *list);
-void			display(t_printf *list);
+
+//type c
 void			type_c(t_printf *list);
 void			c_width(t_printf *list, unsigned int c);
 void			c_width_minus(t_printf *list, unsigned int c);
+
+//type s
 void			type_s(t_printf *list);
 void			str_print_with_minus(t_printf *list, char *str);
 void			str_print_without_minus(t_printf *list, char *str);
-void			d_and_i(t_printf *list);
-size_t			ft_len_of_int(long long i);
+
+//type d
+void			type_di(t_printf *list);
 void			di_print_without_minus(t_printf *list, long long x);
 void			di_print_with_minus(t_printf *list, long long x);
 void			presicion_over_len(t_printf *list, long long x);
+
+//type p
 void			type_p(t_printf *list);
+
+//type u
 void			type_u(t_printf *list);
 void			u_print_without_minus(t_printf *list, long long x);
 void			u_presicion_over_len(t_printf *list, long long x);
 void			u_print_with_minus(t_printf *list, long long x);
-void			type_x_and_X(t_printf *list);
+
+//type x
+void			type_x(t_printf *list);
 void			x_print_without_minus(t_printf *list, long long x);
 void			x_presicion_over_len(t_printf *list, long long x);
 void			x_print_with_minus(t_printf *list, long long x);
 
+//type o
+void			type_o(t_printf *list);
+void			o_print_with_minus(t_printf *list, long long x);
+void			o_presicion_over_len(t_printf *list, long long x);
+void			o_print_without_minus(t_printf *list, long long x);
+
+//add_func
+void			sharp_x(t_printf *list);
+void			ft_putchar_cow(char c, t_printf *list);
+void			ft_putstr_cow(char const *s, t_printf *list);
+size_t			ft_len_of_int(long long i);
+
+//type other
+void   			type_other(t_printf *list);
+void			display_gap(t_printf *list, char c, int len, int update_len);
+
+void			divis(unsigned long long *arr, int i, int num);
+int				lennum(long long n);
 char			*adv_ft_itoa(long long n, int base, char c);
 size_t			lennum_base(long long n, int base);
 void			type_f_and_F(t_printf *list);
 char			*handling_float(double d, int countofel, int pow, t_printf *list);
 char			*nole(void);
-void			ft_putchar_cow(char c, t_printf *list);
-void			ft_putstr_cow(char const *s, t_printf *list);
 void			addit(unsigned long long *arr, int i, unsigned long long num);
 void			mult(unsigned long long *arr, int i, int num, int end);
-long 			change_length_di(t_printf *list, long long x);
-void 			change_length_u_x(t_printf *list, long long x);
-void 			change_length_f_e_a_g(t_printf *list, double x);
 
-void			type_o(t_printf *list);
-void			sharp_x(t_printf *list);
-void	divis(unsigned long long *arr, int i, int num);
-int		lennum(long long n);
-void    type_other(t_printf *list);
-void	display_gap(t_printf *list, char c, int len, int update_len);
+
 
 #endif

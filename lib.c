@@ -178,7 +178,7 @@ char			*ft_itoa(int n)
 	size_t	len;
 
 	len = 0;
-	len = lennum(n);
+	//len = lennum(n);
 	if (len == 0)
 		return ("");
 	if (n == -2147483648)
