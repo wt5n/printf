@@ -5,25 +5,6 @@
 
 #include "printf.h"
 
-int		lennum(long long n)
-{
-	int	i;
-
-	i = 0;
-	if (n < 0)
-	{
-		i++;
-		n *= -1;
-	}
-	while (n >= 10)
-	{
-		n /= 10;
-		i++;
-	}
-	i++;
-	return (i);
-}
-
 void	divis(unsigned long long *arr, int i, int num)
 {
 	unsigned long long res;
@@ -89,6 +70,65 @@ char	*full_str(char *str)
 	return (res);
 }
 
+int		withnull(char *str, char *res, int len, int x)
+{
+	int		j;
+	int		ch;
+
+	j = 0;
+	ch = 10 - len;
+	while (len-- > 0)
+	{
+		res[x] = '0';
+		x++;
+	}
+	while (0 < ch--)
+	{
+		res[x] = str[j];
+		x++;
+		j++;
+	}
+	return (x);
+}
+
+
+char	*full_str2(unsigned long long *arr, int i)
+{
+	int		x;
+	int		j;
+	int 	len;
+	char 	*res;
+	char	*str;
+	int		totallen;
+
+	x = 0;
+	totallen = (15 - i) * 10;
+	if (!(res = (char*)malloc(sizeof(char) * (totallen) + 1)))
+		return (NULL);
+	res[totallen] = '\0';
+	while (i < 15)
+	{
+		str = adv_ft_itoa(arr[i], 10, 'a');
+		//printf("str:%s\n", str);
+		len = 10 - ft_strlen(str);
+		if (len)
+			x = withnull(str, res, len, x);
+		else
+		{
+			j = 0;
+			while (j < 10)
+			{
+				res[x] = str[j];
+				x++;
+				j++;
+			}
+		}
+		i++;
+	}
+	//printf("%s\n", res);
+	return (res);
+}
+
 void	rounding(unsigned long long *arr, int i, int np)
 {
 	int 	x;
@@ -109,18 +149,18 @@ void	rounding(unsigned long long *arr, int i, int np)
 
 void	rounding2(unsigned long long *arr, int i, int precision)
 {
-	//printf("incoming i:%d\n", i);
+	printf("incoming i:%d\n", i);
 	i++;
-	//printf("j:%llu\n", arr[i]);
+	printf("j:%llu\n", arr[i]);
 	//while (i < 10)
 	//{
-	//printf("i:%llu", arr[i]);
+	printf("i:%llu", arr[i]);
 	int delim = 10 * precision;
 	delim = 1000000000;
-	//printf("%llu", arr[i] / delim);
+	printf("%llu", arr[i] / delim);
 	//	i++;
 	//}
-	//printf("\n");
+	printf("\n");
 	while (arr[i] >= 5)
 	{
 		while (i < 10)
@@ -132,6 +172,18 @@ void	rounding2(unsigned long long *arr, int i, int precision)
 		i = 0;
 	}
 }
+
+
+void	rounding3(char *tmp, int p)
+{
+	while (tmp[p] - 48 >= 5)
+	{
+		tmp[p] = '0';
+		p--;
+		tmp[p]++;
+	}
+}
+
 
 void	ap_number(t_double d1 ,unsigned long long *arr, int countofel, int pow)
 {
@@ -205,16 +257,18 @@ char	*handling_float(double d, int countofel, int pow, t_printf *list)
 	arr = (unsigned long long*)malloc(sizeof(unsigned long long) * countofel);
 	ap_number(d1, arr, countofel, pow);
 /*
-	int j;
+	//int j;
 	i = 0;
 	while (i < countofel)
     {
+		
 		j = lennum(arr[i]);
 		while (j < 10)
 		{
 			printf("0");
 			j++;
 		}
+		
         printf("%llu", arr[i]);
         i++;
     }
@@ -226,12 +280,10 @@ char	*handling_float(double d, int countofel, int pow, t_printf *list)
 		i++;
 		n -= 10;
 	}
-	if (list->precision)
-		//rounding(arr, i, n + list->precision + 1);
-		rounding2(arr, i, list->precision);
 	//printf("n:%d\n", n);
 	//printf("\nouti:%d\n", i);
-	tmp = full_str(adv_ft_itoa(arr[i], 10, 'a'));
+	//tmp = full_str(adv_ft_itoa(arr[i], 10, 'a'));
+	tmp = full_str2(arr, i);
 	//printf("tmp:%s\n", tmp);
 	while (*tmp == '0' && n > 1)
 	{
@@ -245,12 +297,14 @@ char	*handling_float(double d, int countofel, int pow, t_printf *list)
 		tmp++;
 	}
 	*/
+/*
 	if (iszero)
 	{
 		ft_putchar_cow('0', list);
 		n--;
 		tmp++;
 	}
+	*/
 	//printf("%s\n", tmp);
 	if (d1.part.s)
 		ft_putchar_cow('-', list);
@@ -258,16 +312,11 @@ char	*handling_float(double d, int countofel, int pow, t_printf *list)
 		ft_putchar_cow(*tmp++, list);
 	//printf("\nbefore:%llu %d\n", arr[i], i);
 	if (list->precision)
-		ft_putchar_cow('.', list);
-	while (list->precision--)
 	{
-		if (!*tmp)
-		{
-			i++;
-			tmp = full_str(adv_ft_itoa(arr[i], 10, 'a'));
-		}
-		ft_putchar_cow(*tmp++, list);
+		ft_putchar_cow('.', list);
+		rounding3(tmp, list->precision + 1);
 	}
-	//ft_putstr_cow(tmp, list);
+	while (list->precision--)
+		ft_putchar_cow(*tmp++, list);
 	return (tmp);
 }
