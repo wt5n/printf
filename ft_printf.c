@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:25:19 by hlikely           #+#    #+#             */
-/*   Updated: 2020/02/24 16:26:16 by hlikely          ###   ########.fr       */
+/*   Updated: 2020/02/25 18:21:45 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int			init(t_printf *list)
 		{
 			list->i++;
 			flag(list);
+			if (list->type == '\0' && list->f_copy[list->i++] != '%')
+				return (-1);
 			display(list);
 			reset_list(list);
 		}

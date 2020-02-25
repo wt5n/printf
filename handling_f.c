@@ -179,22 +179,25 @@ char	*handling_float(double d, int countofel, int pow, t_printf *list)
 	int 				i;
 	char 				*tmp;
 	int 				n;
-	int 				iszero;
-	int					lessone;
+	//int 				iszero;
+	//int				lessone;
 
-	iszero = 0;
-	lessone = 0;
+	//iszero = 0;
+	//lessone = 0;
 	n = 98;
 	i = 0;
+	/*
 	if (d < 1)
 	{
 		lessone = 1;
 	}
+	
 	if (d == 0)
 	{
 		d += 1;
 		iszero = 1;
 	}
+	*/
 	d1.d = d;
 	//printf("m:%llu e:%llu\n", d1.part.m, d1.part.e);
 	arr = (unsigned long long*)malloc(sizeof(unsigned long long) * countofel);
@@ -233,7 +236,7 @@ char	*handling_float(double d, int countofel, int pow, t_printf *list)
 		tmp++;
 		n--;
 	}
-	if ((list->precision == 0 && list->np == 'n') || list->precision)
+	if (((list->precision == 0 && list->np == 'n') || list->precision))
 		rounding(tmp, list->precision + n);
 	/*
 	if (lessone)
@@ -241,8 +244,8 @@ char	*handling_float(double d, int countofel, int pow, t_printf *list)
 		ft_putchar_cow('0', list);
 		tmp++;
 	}
-	*/
-/*
+	
+
 	if (iszero)
 	{
 		ft_putchar_cow('0', list);
@@ -256,7 +259,7 @@ char	*handling_float(double d, int countofel, int pow, t_printf *list)
 	while (n--)
 		ft_putchar_cow(*tmp++, list);
 	//printf("\nbefore:%llu %d\n", arr[i], i);
-	if (list->precision)
+	if (list->precision || list->flags[3] == '#')
 	{
 		ft_putchar_cow('.', list);
 		
