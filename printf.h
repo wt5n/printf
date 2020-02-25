@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printf.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:42:52 by hlikely           #+#    #+#             */
-/*   Updated: 2020/02/24 16:57:35 by hlikely          ###   ########.fr       */
+/*   Updated: 2020/02/25 20:52:17 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # include <stdio.h>
 
-typedef	struct 	s_printf
+typedef	struct	s_printf
 {
 	const char	*format;
 	char		flags[6];
@@ -44,7 +44,7 @@ typedef	struct 	s_printf
 	char		*cons;
 }				t_printf;
 
-typedef union 	s_double
+typedef union	s_double
 {
 	double d;
 	struct
@@ -62,7 +62,7 @@ t_printf		*newlist_with_printf();
 int				init(t_printf *list);
 void			reset_list(t_printf *list);
 
-// parsing 
+// parsing
 t_printf		*flag(t_printf *list);
 t_printf		*width(t_printf *list);
 t_printf		*precision(t_printf *list);
@@ -113,19 +113,22 @@ void			ft_putstr_cow(char const *s, t_printf *list);
 size_t			ft_len_of_int(long long i);
 
 //type other
-void   			type_other(t_printf *list);
+void			type_other(t_printf *list);
 void			display_gap(t_printf *list, char c, int len, int update_len);
 
 void			divis(unsigned long long *arr, int i, int num);
 int				lennum(long long n);
 char			*adv_ft_itoa(long long n, int base, char c);
 size_t			lennum_base(long long n, int base);
-void			type_f_and_F(t_printf *list);
-char			*handling_float(double d, int countofel, int pow, t_printf *list);
+void			type_f(t_printf *list);
+void			handling_float(double d, int countofel, int pow, t_printf *list);
 char			*nole(void);
 void			addit(unsigned long long *arr, int i, unsigned long long num);
 void			mult(unsigned long long *arr, int i, int num, int end);
+void			rounding(char *tmp, int p);
 
-
+void			f_print_with_minus1(t_printf *list, double x);
+void			f_presicion_over_len1(t_printf *list, double x);
+void			f_print_without_minus1(t_printf *list, double x);
 
 #endif

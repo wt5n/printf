@@ -284,4 +284,16 @@ char	*ft_strnew(size_t size)
 	return (res);
 }
 
+int		findfirstel(unsigned long long *arr, int end)
+{
+	int i;
 
+	i = 0;
+	while (i < end)
+	{
+		if (arr[i] != 0)
+			return (i);
+		i++;
+	}
+	return (end);
+}

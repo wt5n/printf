@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   adv_itoa.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/25 19:16:00 by ksenaida          #+#    #+#             */
+/*   Updated: 2020/02/25 19:20:37 by ksenaida         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "printf.h"
 
-size_t	lennum_base(long long n, int base)
+size_t		lennum_base(long long n, int base)
 {
 	size_t	i;
 
@@ -18,14 +30,14 @@ size_t	lennum_base(long long n, int base)
 	return (i);
 }
 
-char			size_of_letter(char c)
+char		size_of_letter(char c)
 {
 	if (c >= 'a')
 		return ('a');
 	return ('A');
 }
 
-char	*nole(void)
+char		*nole(void)
 {
 	char	*res;
 
@@ -37,7 +49,7 @@ char	*nole(void)
 	return (res);
 }
 
-char			*adv_ft_itoa(long long n, int base, char c)
+char		*adv_ft_itoa(long long n, int base, char c)
 {
 	char	*res;
 	size_t	len;

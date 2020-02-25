@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:25:19 by hlikely           #+#    #+#             */
-/*   Updated: 2020/02/25 18:21:45 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/02/25 19:55:48 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,13 @@ void		reset_list(t_printf *list)
 
 int			init(t_printf *list)
 {
-	if (ft_strcmp(list->f_copy, "%") == 0)
-		return (0);
 	while (list->f_copy[list->i] != '\0')
 	{
 		if (list->f_copy[list->i] == '%')
 		{
 			list->i++;
 			flag(list);
-			if (list->type == '\0' && list->f_copy[list->i++] != '%')
+			if (list->type == 'Q')
 				return (-1);
 			display(list);
 			reset_list(list);
@@ -89,7 +87,7 @@ void		display(t_printf *list)
 	else if (list->type == 'c' || list->type == 'C')
 		type_c(list);
 	else if (list->type == 'f' || list->type == 'F')
-		type_f_and_F(list);
+		type_f(list);
 	else if (list->type == 's' || list->type == 'S')
 		type_s(list);
 	else if (list->type == 'u' || list->type == 'U')

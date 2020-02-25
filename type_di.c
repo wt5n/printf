@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   type_di.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:26:55 by hlikely           #+#    #+#             */
-/*   Updated: 2020/02/24 21:07:50 by hlikely          ###   ########.fr       */
+/*   Updated: 2020/02/25 19:05:02 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
-#include <limits.h>
 
 static void	di_print_without_minus1(t_printf *list, long long x)
 {
@@ -63,7 +62,7 @@ static void	one_more_func(t_printf *list, intmax_t x)
 {
 	if (list->flags[0] == '+' && list->flags[2] == ' ')
 		list->flags[2] = '\0';
-	if (list->precision == 0 && list->np == 'n')
+	if (list->precision == 0 && list->np == 'n' && x == 0)
 		list->len_of_x = 0;
 	if (list->width > list->len_of_x)
 		list->widthofline = list->width;
