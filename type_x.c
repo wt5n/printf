@@ -3,43 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   type_x.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 15:40:55 by hlikely           #+#    #+#             */
-/*   Updated: 2020/02/24 16:09:33 by hlikely          ###   ########.fr       */
+/*   Updated: 2020/02/26 18:59:44 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-void		x_print_with_minus(t_printf *list, long long x)
+void		x_print_with_minus(t_printf *l, long long x)
 {
-	if (list->flags[3] == '#' && list->len_of_x > 0 && \
-	list->widthofline > 1 && x != 0)
-		sharp_x(list);
-	if (list->len_of_x > 0)
-		list->len_of_x = lennum_base(x, list->base);
-	while (list->precision > list->len_of_x)
+	char	*t;
+
+	if (l->flags[3] == '#' && l->len_of_x > 0 && l->widthofline > 1 && x != 0)
+		sharp_x(l);
+	if (l->len_of_x > 0)
+		l->len_of_x = lennum_base(x, l->base);
+	while (l->precision > l->len_of_x)
 	{
-		ft_putchar_cow('0', list);
-		list->precision--;
-		list->widthofline--;
+		ft_putchar_cow('0', l);
+		l->precision--;
+		l->widthofline--;
 	}
-	if (list->len_of_x > 0)
+	if (l->len_of_x > 0)
 	{
-		ft_putstr_cow(adv_ft_itoa(x, list->base, list->type), list);
-		list->widthofline -= lennum_base(x, list->base);
-		list->widthofcontent -= lennum_base(x, list->base);
+		t = adv_ft_itoa(x, l->base, l->type);
+		ft_putstr_cow(t, l);
+		l->widthofline -= lennum_base(x, l->base);
+		l->widthofcontent -= lennum_base(x, l->base);
+		free(t);
 	}
-	while (list->widthofline > 0)
+	while (l->widthofline > 0)
 	{
-		ft_putchar_cow(' ', list);
-		list->widthofline--;
+		ft_putchar_cow(' ', l);
+		l->widthofline--;
 	}
 }
 
 void		x_presicion_over_len(t_printf *list, long long x)
 {
+	char	*t;
+
 	if (list->flags[3] == '#' && x != 0)
 		list->widthofcontent += 2;
 	while (list->widthofline > list->widthofcontent)
@@ -55,11 +60,17 @@ void		x_presicion_over_len(t_printf *list, long long x)
 		list->widthofcontent--;
 	}
 	if (list->len_of_x > 0)
-		ft_putstr_cow(adv_ft_itoa(x, list->base, list->type), list);
+	{
+		t = adv_ft_itoa(x, list->base, list->type);
+		ft_putstr_cow(t, list);
+		free(t);
+	}
 }
 
 void		x_print_without_minus(t_printf *list, long long x)
 {
+	char	*t;
+
 	while (list->widthofline > list->widthofcontent && \
 		((list->precision < list->len_of_x && list->np == 'n') || \
 		(list->flags[4] != '0')))
@@ -78,7 +89,11 @@ void		x_print_without_minus(t_printf *list, long long x)
 		list->widthofline--;
 	}
 	if (list->len_of_x > 0)
-		ft_putstr_cow(adv_ft_itoa(x, list->base, list->type), list);
+	{
+		t = adv_ft_itoa(x, list->base, list->type);
+		ft_putstr_cow(t, list);
+		free(t);
+	}
 }
 
 static void	one_more_func(t_printf *list, uintmax_t x)

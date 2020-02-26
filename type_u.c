@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type_u.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:17:17 by hlikely           #+#    #+#             */
-/*   Updated: 2020/02/24 16:30:46 by hlikely          ###   ########.fr       */
+/*   Updated: 2020/02/26 19:08:55 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void		u_print_with_minus(t_printf *list, long long x)
 {
+	char	*t;
+
 	if (list->len_of_x > 0)
 		list->len_of_x = ft_len_of_int(x);
 	while (list->precision > list->len_of_x)
@@ -23,9 +25,11 @@ void		u_print_with_minus(t_printf *list, long long x)
 	}
 	if (list->len_of_x > 0)
 	{
-		ft_putstr_cow(adv_ft_itoa(x, 10, 'a'), list);
+		t = adv_ft_itoa(x, 10, 'a');
+		ft_putstr_cow(t, list);
 		list->widthofline -= list->len_of_x;
 		list->widthofcontent -= list->len_of_x;
+		free(t);
 	}
 	while (list->widthofline > list->widthofcontent)
 	{
@@ -36,6 +40,8 @@ void		u_print_with_minus(t_printf *list, long long x)
 
 void		u_presicion_over_len(t_printf *list, long long x)
 {
+	char	*t;
+
 	while (list->widthofline > list->widthofcontent)
 	{
 		ft_putchar_cow(' ', list);
@@ -47,11 +53,17 @@ void		u_presicion_over_len(t_printf *list, long long x)
 		list->widthofcontent--;
 	}
 	if (list->len_of_x > 0)
-		ft_putstr_cow(adv_ft_itoa(x, 10, 'a'), list);
+	{
+		t = adv_ft_itoa(x, 10, 'a');
+		ft_putstr_cow(t, list);
+		free(t);
+	}
 }
 
 void		u_print_without_minus(t_printf *list, long long x)
 {
+	char	*t;
+
 	while (list->widthofline > list->widthofcontent && \
 		((list->precision < list->len_of_x && list->np == 'n') || \
 		(list->flags[4] != '0')))
@@ -68,7 +80,11 @@ void		u_print_without_minus(t_printf *list, long long x)
 		list->widthofline--;
 	}
 	if (list->len_of_x > 0)
-		ft_putstr_cow(adv_ft_itoa(x, 10, 'a'), list);
+	{
+		t = adv_ft_itoa(x, 10, 'a');
+		ft_putstr_cow(t, list);
+		free(t);
+	}
 }
 
 static void	one_more_func(t_printf *list)
