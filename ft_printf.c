@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:25:19 by hlikely           #+#    #+#             */
-/*   Updated: 2020/02/25 19:55:48 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/02/26 19:09:02 by hlikely          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_printf	*newlist_with_printf(t_printf *list)
 	list->np = 'n';
 	list->nw = 'n';
 	list->i = 0;
-	list->types = "aAcCeEgGsSnpdDifFuUoxX%";
+	list->types = "aAbcCeEgGsSnpdDifFuUoxX%";
 	list->cons = "+- #0";
 	list->args = "lhjzL";
 	list->len_of_x = 0;
@@ -98,6 +98,8 @@ void		display(t_printf *list)
 		type_o(list);
 	else if (list->type == 'p')
 		type_p(list);
+	else if (list->type == 'b')
+		type_b(list);
 	else
 		type_other(list);
 }

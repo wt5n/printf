@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printf.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:42:52 by hlikely           #+#    #+#             */
-/*   Updated: 2020/02/25 20:52:17 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/02/26 17:50:29 by hlikely          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,12 @@ void			sharp_x(t_printf *list);
 void			ft_putchar_cow(char c, t_printf *list);
 void			ft_putstr_cow(char const *s, t_printf *list);
 size_t			ft_len_of_int(long long i);
+
+//type b
+void			type_b(t_printf *list);
+void			b_print_without_minus(t_printf *list, long long x);
+void			b_presicion_over_len(t_printf *list, long long x);
+void			b_print_with_minus(t_printf *list, long long x);
 
 //type other
 void			type_other(t_printf *list);

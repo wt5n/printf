@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   adv_itoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 19:16:00 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/02/25 19:20:37 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/02/26 19:53:57 by hlikely          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,22 @@ char		*nole(void)
 	return (res);
 }
 
+void	check_add(long long n, char *res, int base, char cc, size_t len)
+{
+	if (n < 0)
+		res[0] = '-';
+	if (n < 0)
+		n *= -1;
+	while (n > 0)
+	{
+		if (n % base > 9)
+			res[len--] = (n % base) + (cc - 10);
+		else
+			res[len--] = (n % base) + '0';
+		n /= base;
+	}
+}
+
 char		*adv_ft_itoa(long long n, int base, char c)
 {
 	char	*res;
@@ -64,17 +80,6 @@ char		*adv_ft_itoa(long long n, int base, char c)
 	if (!(res = (char*)malloc(sizeof(char) * len + 1)))
 		return (NULL);
 	res[len--] = '\0';
-	if (n < 0)
-		res[0] = '-';
-	if (n < 0)
-		n *= -1;
-	while (n > 0)
-	{
-		if (n % base > 9)
-			res[len--] = (n % base) + (cc - 10);
-		else
-			res[len--] = (n % base) + '0';
-		n /= base;
-	}
+	check_add(n, res, base, cc, len);
 	return (res);
 }
