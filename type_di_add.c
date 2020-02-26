@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 17:07:22 by hlikely           #+#    #+#             */
-/*   Updated: 2020/02/25 17:08:50 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/02/25 22:33:45 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 static void	one_more_func(t_printf *list, long long x)
 {
+	char *t;
+
 	while (list->precision > list->len_of_x)
 	{
 		ft_putchar_cow('0', list);
@@ -22,7 +24,8 @@ static void	one_more_func(t_printf *list, long long x)
 	}
 	if (list->len_of_x > 0)
 	{
-		ft_putstr_cow(adv_ft_itoa(x, 10, 'a'), list);
+		t = adv_ft_itoa(x, 10, 'a');
+		ft_putstr_cow(t, list);
 		list->widthofline -= list->len_of_x;
 		list->widthofcontent -= list->len_of_x;
 	}
@@ -31,6 +34,7 @@ static void	one_more_func(t_printf *list, long long x)
 		ft_putchar_cow(' ', list);
 		list->widthofline--;
 	}
+	free(t);
 }
 
 void		di_print_with_minus(t_printf *list, long long x)
@@ -60,6 +64,7 @@ void		di_print_with_minus(t_printf *list, long long x)
 
 static void	one_more_func1(t_printf *list, long long x)
 {
+	char	*t;
 	if (x < 0)
 	{
 		ft_putchar_cow('-', list);
@@ -72,7 +77,11 @@ static void	one_more_func1(t_printf *list, long long x)
 		list->widthofcontent--;
 	}
 	if (list->len_of_x > 0)
-		ft_putstr_cow(adv_ft_itoa(x, 10, 'a'), list);
+	{
+		t = adv_ft_itoa(x, 10, 'a');
+		ft_putstr_cow(t, list);
+		free(t);
+	}
 }
 
 void		presicion_over_len(t_printf *list, long long x)
