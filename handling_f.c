@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 19:22:56 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/02/25 19:46:00 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/02/26 19:25:12 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ char	*full_str(unsigned long long *arr, int i)
 			while (j < 10)
 				res[x++] = str[j++];
 		i++;
+		free(str);
 	}
 	return (res);
 }
@@ -127,5 +128,6 @@ void	handling_float(double d, int countofel, int pow, t_printf *list)
 	}
 	tmp = full_str(arr, i);
 	handling_float_part2(list, tmp, n, d1.part.s);
+	free(arr);
 	free(tmp);
 }

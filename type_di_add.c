@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 17:07:22 by hlikely           #+#    #+#             */
-/*   Updated: 2020/02/25 22:33:45 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/02/26 18:51:04 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ static void	one_more_func(t_printf *list, long long x)
 		ft_putstr_cow(t, list);
 		list->widthofline -= list->len_of_x;
 		list->widthofcontent -= list->len_of_x;
+		free(t);
 	}
 	while (list->widthofline > list->widthofcontent)
 	{
 		ft_putchar_cow(' ', list);
 		list->widthofline--;
 	}
-	free(t);
 }
 
 void		di_print_with_minus(t_printf *list, long long x)
@@ -65,6 +65,7 @@ void		di_print_with_minus(t_printf *list, long long x)
 static void	one_more_func1(t_printf *list, long long x)
 {
 	char	*t;
+
 	if (x < 0)
 	{
 		ft_putchar_cow('-', list);
