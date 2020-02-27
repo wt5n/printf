@@ -6,13 +6,13 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 19:52:53 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/02/25 20:52:48 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/02/27 17:19:50 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-void		f_print_with_minus(t_printf *list, double x)
+void		f_print_with_minus(t_printf *list, long double x)
 {
 	if ((list->flags[0] == '+') && (int)x >= 0)
 	{
@@ -37,7 +37,7 @@ void		f_print_with_minus(t_printf *list, double x)
 	f_print_with_minus1(list, x);
 }
 
-void		f_presicion_over_len(t_printf *list, double x)
+void		f_presicion_over_len(t_printf *list, long double x)
 {
 	if (list->width > list->precision && (int)x < 0)
 		list->widthofline--;
@@ -55,7 +55,7 @@ void		f_presicion_over_len(t_printf *list, double x)
 	f_presicion_over_len1(list, x);
 }
 
-void		f_print_without_minus(t_printf *list, double x)
+void		f_print_without_minus(t_printf *list, long double x)
 {
 	if ((list->flags[2] == ' ') && \
 		list->widthofcontent >= list->len_of_x && (int)x >= 0)
@@ -78,7 +78,7 @@ void		f_print_without_minus(t_printf *list, double x)
 	f_print_without_minus1(list, x);
 }
 
-static void	partofthesystem(t_printf *list, double x)
+static void	partofthesystem(t_printf *list, long double x)
 {
 	if (list->flags[0] == '+' && list->flags[2] == ' ')
 		list->flags[2] = '\0';
@@ -103,7 +103,7 @@ static void	partofthesystem(t_printf *list, double x)
 
 void		type_f(t_printf *list)
 {
-	double	x;
+	long double	x;
 
 	if (ft_strcmp(list->length, "L") == 0)
 		x = (long double)va_arg(list->ap, long double);

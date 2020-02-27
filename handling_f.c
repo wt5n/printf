@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 19:22:56 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/02/26 19:25:12 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/02/27 17:19:43 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,14 @@ void	ap_number(t_double d1, unsigned long long *arr, int countofel, int pow)
 	}
 }
 
-void	handling_float_part2(t_printf *list, char *tmp, int n, int s)
+void	handling_float_part2(t_printf *list, char *tmp, long long n, int s)
 {
 	while (*tmp == '0' && n > 1)
 	{
 		tmp++;
 		n--;
 	}
+
 	if (((list->precision == 0 && list->np == 'n') || list->precision))
 		rounding(tmp, list->precision + n);
 	if (s)
@@ -107,13 +108,13 @@ void	handling_float_part2(t_printf *list, char *tmp, int n, int s)
 		ft_putchar_cow(*tmp++, list);
 }
 
-void	handling_float(double d, int countofel, int pow, t_printf *list)
+void	handling_float(long double d, int countofel, int pow, t_printf *list)
 {
 	t_double			d1;
 	unsigned long long	*arr;
 	int					i;
 	char				*tmp;
-	int					n;
+	long long			n;
 
 	n = 98;
 	i = 0;

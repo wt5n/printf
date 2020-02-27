@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type_str.c                                         :+:      :+:    :+:   */
+/*   type_s.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 14:34:15 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/02/24 15:36:40 by hlikely          ###   ########.fr       */
+/*   Updated: 2020/02/27 16:05:38 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,11 @@ static void	one_more_func(t_printf *list)
 	if (list->width >= list->len_of_x)
 		list->widthofline = list->width;
 	else if (list->width < list->len_of_x && list->nw == 'n' && \
-			list->precision < list->len_of_x && list->np == 'n')
+			list->precision < list->len_of_x && list->np == 'n' && \
+			list->width > list->precision)
 		list->widthofline = list->width;
-	else if (list->width < list->len_of_x && list->nw == 'n')
+	else if (list->width < list->len_of_x && list->nw == 'n' && \
+			list->precision < list->width)
 		list->widthofline = list->len_of_x;
 	else if (list->precision < list->len_of_x && list->np == 'n')
 		list->widthofline = list->precision;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   adv_itoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 19:16:00 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/02/26 20:29:13 by hlikely          ###   ########.fr       */
+/*   Updated: 2020/02/27 12:12:02 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,22 @@ char		size_of_letter(char c)
 	return ('A');
 }
 
-char		*nole(void)
+char		*kraynie(size_t len, long long n)
 {
-	char	*res;
+	char 	*res;
+	char	*str;
 
-	res = (char*)malloc(sizeof(char) * 2);
-	if (!res)
-		return (NULL);
-	res[0] = '0';
-	res[1] = '\0';
+	if (len == 0)
+		str = "";
+	if (n == 0)
+		str = "0";
+	else
+		str = "-9223372036854775808";
+	res = (char*)malloc(sizeof(char) * ft_strlen(str) + 1);
+	ft_strcpy(res, str);
 	return (res);
 }
+
 
 char		*adv_ft_itoa(long long n, int base, char c)
 {
@@ -55,10 +60,8 @@ char		*adv_ft_itoa(long long n, int base, char c)
 	size_t	len;
 
 	len = lennum_base(n, base);
-	if (len == 0)
-		return ("");
-	if (n == 0)
-		return (nole());
+	if (len == 0 || n == 0 || n == LONG_MIN)
+		return(kraynie(len , n));
 	if (!(res = (char*)malloc(sizeof(char) * len + 1)))
 		return (NULL);
 	res[len--] = '\0';

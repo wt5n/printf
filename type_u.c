@@ -6,18 +6,14 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:17:17 by hlikely           #+#    #+#             */
-/*   Updated: 2020/02/26 19:08:55 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/02/27 17:26:55 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-void		u_print_with_minus(t_printf *list, long long x)
+void		u_print_with_minus(t_printf *list, char *t)
 {
-	char	*t;
-
-	if (list->len_of_x > 0)
-		list->len_of_x = ft_len_of_int(x);
 	while (list->precision > list->len_of_x)
 	{
 		ft_putchar_cow('0', list);
@@ -25,7 +21,6 @@ void		u_print_with_minus(t_printf *list, long long x)
 	}
 	if (list->len_of_x > 0)
 	{
-		t = adv_ft_itoa(x, 10, 'a');
 		ft_putstr_cow(t, list);
 		list->widthofline -= list->len_of_x;
 		list->widthofcontent -= list->len_of_x;
@@ -38,10 +33,8 @@ void		u_print_with_minus(t_printf *list, long long x)
 	}
 }
 
-void		u_presicion_over_len(t_printf *list, long long x)
+void		u_presicion_over_len(t_printf *list, char *t)
 {
-	char	*t;
-
 	while (list->widthofline > list->widthofcontent)
 	{
 		ft_putchar_cow(' ', list);
@@ -54,16 +47,13 @@ void		u_presicion_over_len(t_printf *list, long long x)
 	}
 	if (list->len_of_x > 0)
 	{
-		t = adv_ft_itoa(x, 10, 'a');
 		ft_putstr_cow(t, list);
 		free(t);
 	}
 }
 
-void		u_print_without_minus(t_printf *list, long long x)
+void		u_print_without_minus(t_printf *list, char *t)
 {
-	char	*t;
-
 	while (list->widthofline > list->widthofcontent && \
 		((list->precision < list->len_of_x && list->np == 'n') || \
 		(list->flags[4] != '0')))
@@ -81,14 +71,14 @@ void		u_print_without_minus(t_printf *list, long long x)
 	}
 	if (list->len_of_x > 0)
 	{
-		t = adv_ft_itoa(x, 10, 'a');
 		ft_putstr_cow(t, list);
 		free(t);
 	}
 }
 
-static void	one_more_func(t_printf *list)
+static void	one_more_func(t_printf *list, unsigned long long x)
 {
+	list->len_of_x = ft_len_of_int(x);
 	if (list->precision == 0 && list->np == 'n')
 		list->len_of_x = 0;
 	if (list->width > list->len_of_x)
@@ -108,7 +98,8 @@ static void	one_more_func(t_printf *list)
 
 void		type_u(t_printf *list)
 {
-	uintmax_t x;
+	uintmax_t	x;
+	char		*t;
 
 	if (ft_strcmp(list->length, "l") == 0)
 		x = (unsigned long)va_arg(list->ap, unsigned long int);
@@ -121,12 +112,15 @@ void		type_u(t_printf *list)
 	else
 		x = (unsigned int)va_arg(list->ap, unsigned long int);
 	x = (uintmax_t)x;
-	list->len_of_x = ft_len_of_int(x);
-	one_more_func(list);
-	if ((list->flags[1] == '-') && (list->width > list->widthofcontent))
-		u_print_with_minus(list, x);
-	else if (list->precision > list->len_of_x - 1)
-		u_presicion_over_len(list, x);
+	if (x == ULONG_MAX)
+		t = ft_strdup("18446744073709551615");
 	else
-		u_print_without_minus(list, x);
+		t = adv_ft_itoa(x, list->base, 'a');
+	one_more_func(list, x);
+	if ((list->flags[1] == '-') && (list->width > list->widthofcontent))
+		u_print_with_minus(list, t);
+	else if (list->precision > list->len_of_x - 1)
+		u_presicion_over_len(list, t);
+	else
+		u_print_without_minus(list, t);
 }

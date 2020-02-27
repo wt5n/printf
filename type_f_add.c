@@ -6,13 +6,13 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 19:58:51 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/02/26 19:10:30 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/02/27 17:06:31 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-void	f_print_with_minus1(t_printf *list, double x)
+void	f_print_with_minus1(t_printf *list, long double x)
 {
 	while (list->precision > list->len_of_x)
 	{
@@ -32,7 +32,7 @@ void	f_print_with_minus1(t_printf *list, double x)
 	}
 }
 
-void	f_presicion_over_len1(t_printf *list, double x)
+void	f_presicion_over_len1(t_printf *list, long double x)
 {
 	if (x < 0)
 	{
@@ -48,7 +48,7 @@ void	f_presicion_over_len1(t_printf *list, double x)
 	handling_float(x, 15, 52, list);
 }
 
-void	f_print_without_minus1(t_printf *list, double x)
+void	f_print_without_minus1(t_printf *list, long double x)
 {
 	while (list->widthofline > list->widthofcontent)
 	{
