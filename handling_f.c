@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 19:22:56 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/02/27 17:19:43 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/02/27 19:56:37 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void	handling_float_part2(t_printf *list, char *tmp, long long n, int s)
 		tmp++;
 		n--;
 	}
-
 	if (((list->precision == 0 && list->np == 'n') || list->precision))
 		rounding(tmp, list->precision + n);
 	if (s)

@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 19:16:00 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/02/27 12:12:02 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/02/27 19:57:54 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char		size_of_letter(char c)
 
 char		*kraynie(size_t len, long long n)
 {
-	char 	*res;
+	char	*res;
 	char	*str;
 
 	if (len == 0)
@@ -53,7 +53,6 @@ char		*kraynie(size_t len, long long n)
 	return (res);
 }
 
-
 char		*adv_ft_itoa(long long n, int base, char c)
 {
 	char	*res;
@@ -61,7 +60,7 @@ char		*adv_ft_itoa(long long n, int base, char c)
 
 	len = lennum_base(n, base);
 	if (len == 0 || n == 0 || n == LONG_MIN)
-		return(kraynie(len , n));
+		return (kraynie(len, n));
 	if (!(res = (char*)malloc(sizeof(char) * len + 1)))
 		return (NULL);
 	res[len--] = '\0';
