@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printf.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:42:52 by hlikely           #+#    #+#             */
-/*   Updated: 2020/02/27 17:19:22 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/02/28 17:42:42 by hlikely          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdarg.h>
 # include "libft/libft.h"
 # include <ctype.h>
-#include <limits.h>
+# include <limits.h>
 
 # include <stdio.h>
 
@@ -55,6 +55,17 @@ typedef	union				u_double
 		unsigned long long	s:	1;
 	}						part;
 }							t_double;
+
+typedef union				u_double_1
+{
+	long double				ld;
+	struct
+	{
+		unsigned long long	m:	64;
+		unsigned long long	e:	15;
+		unsigned long long	s:	1;
+	}						part1;
+}							t_double_1;
 
 void						display(t_printf *list);
 int							ft_printf(const char *format, ...);
@@ -116,5 +127,8 @@ void						rounding(char *tmp, int p);
 void						f_print_with_minus1(t_printf *list, long double x);
 void						f_presicion_over_len1(t_printf *list, long double x);
 void						f_print_without_minus1(t_printf *list, long double x);
+void						handling_float_lf(long double d, int countofel, int pow, t_printf *list);
+int							withnull(char *str, char *res, int len, int x);
+char						*full_str(unsigned long long *arr, int i);
 
 #endif
