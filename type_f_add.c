@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type_f_add.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 19:58:51 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/02/28 17:37:43 by hlikely          ###   ########.fr       */
+/*   Updated: 2020/02/28 20:26:43 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	f_print_with_minus1(t_printf *list, long double x)
 	if (list->len_of_x > 0)
 	{
 		if (ft_strcmp(list->length, "L") == 0)
-			handling_float_lf(x, 15, 64, list);
+			handling_float_lf(x, 15, 63, list);
 		else
 			handling_float(x, 15, 52, list);
 		list->widthofline -= list->len_of_x;
@@ -49,7 +49,7 @@ void	f_presicion_over_len1(t_printf *list, long double x)
 		list->widthofcontent--;
 	}
 	if (ft_strcmp(list->length, "L") == 0)
-		handling_float_lf(x, 15, 64, list);
+		handling_float_lf(x, 15, 63, list);
 	else
 		handling_float(x, 15, 52, list);
 }
@@ -74,7 +74,7 @@ void	f_print_without_minus1(t_printf *list, long double x)
 		list->widthofline--;
 	}
 	if (ft_strcmp(list->length, "L") == 0)
-		handling_float_lf(x, 15, 64, list);
+		handling_float_lf(x, 15, 63, list);
 	else
 		handling_float(x, 15, 52, list);
 }
