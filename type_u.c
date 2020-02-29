@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:17:17 by hlikely           #+#    #+#             */
-/*   Updated: 2020/02/27 17:26:55 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/02/29 19:50:39 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ static void	one_more_func(t_printf *list, unsigned long long x)
 
 void		type_u(t_printf *list)
 {
-	uintmax_t	x;
+	unsigned long long	x;
 	char		*t;
 
 	if (ft_strcmp(list->length, "l") == 0)
@@ -111,7 +111,6 @@ void		type_u(t_printf *list)
 		x = (unsigned short)va_arg(list->ap, unsigned int);
 	else
 		x = (unsigned int)va_arg(list->ap, unsigned long int);
-	x = (uintmax_t)x;
 	if (x == ULONG_MAX)
 		t = ft_strdup("18446744073709551615");
 	else

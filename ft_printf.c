@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:25:19 by hlikely           #+#    #+#             */
-/*   Updated: 2020/02/26 19:09:02 by hlikely          ###   ########.fr       */
+/*   Updated: 2020/02/29 21:38:56 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void		reset_list(t_printf *list)
 	list->np = 'n';
 	list->nw = 'n';
 	list->len_of_x = 0;
+	list->floatzero = 0;
+	list->floatminimum = 0;
 }
 
 int			init(t_printf *list)
@@ -44,7 +46,7 @@ int			init(t_printf *list)
 			list->i++;
 			flag(list);
 			if (list->type == 'Q')
-				return (-1);
+				return (0);
 			display(list);
 			reset_list(list);
 		}
@@ -66,6 +68,11 @@ t_printf	*newlist_with_printf(t_printf *list)
 	list->length[1] = '\0';
 	list->length[2] = '\0';
 	list->type = 'Q';
+	list->flags[0] = '\0';
+	list->flags[1] = '\0';
+	list->flags[2] = '\0';
+	list->flags[3] = '\0';
+	list->flags[4] = '\0';
 	list->widthofline = 0;
 	list->widthofcontent = 0;
 	list->base = 10;
@@ -77,6 +84,8 @@ t_printf	*newlist_with_printf(t_printf *list)
 	list->cons = "+- #0";
 	list->args = "lhjzL";
 	list->len_of_x = 0;
+	list->floatzero = 0;
+	list->floatminimum = 0;
 	return (list);
 }
 
@@ -106,7 +115,8 @@ void		display(t_printf *list)
 
 int			ft_printf(const char *format, ...)
 {
-	t_printf *list;
+	t_printf 	*list;
+	int			i;
 
 	if (!(list = (t_printf*)malloc(sizeof(t_printf))))
 		return (-1);
@@ -119,6 +129,7 @@ int			ft_printf(const char *format, ...)
 		list->cow = init(list);
 		va_end(list->ap);
 	}
+	i = list->cow;
 	free(list);
-	return (list->cow);
+	return (i);
 }

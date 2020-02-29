@@ -6,13 +6,13 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:11:50 by hlikely           #+#    #+#             */
-/*   Updated: 2020/02/27 17:25:27 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/02/29 19:50:13 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-void		o_print_with_minus(t_printf *l, long long x, char *t)
+void		o_print_with_minus(t_printf *l, unsigned long long x, char *t)
 {
 	while (l->precision > l->len_of_x)
 	{
@@ -36,7 +36,7 @@ void		o_print_with_minus(t_printf *l, long long x, char *t)
 	}
 }
 
-void		o_presicion_over_len(t_printf *list, long long x, char *t)
+void		o_presicion_over_len(t_printf *list, unsigned long long x, char *t)
 {
 	while (list->widthofline > list->widthofcontent)
 	{
@@ -55,7 +55,7 @@ void		o_presicion_over_len(t_printf *list, long long x, char *t)
 	free(t);
 }
 
-void		o_print_without_minus(t_printf *list, long long x, char *t)
+void		o_print_without_minus(t_printf *list, unsigned long long x, char *t)
 {
 	while (list->widthofline > list->widthofcontent && \
 		((list->precision < list->len_of_x && list->np == 'n') || \
@@ -79,7 +79,7 @@ void		o_print_without_minus(t_printf *list, long long x, char *t)
 	free(t);
 }
 
-static void	one_more_func(t_printf *list, uintmax_t x)
+static void	one_more_func(t_printf *list, unsigned long long x)
 {
 	list->len_of_x = lennum_base(x, list->base);
 	if (list->precision == 0 && list->np == 'n' && (list->flags[3] != '#'))
@@ -103,8 +103,8 @@ static void	one_more_func(t_printf *list, uintmax_t x)
 
 void		type_o(t_printf *list)
 {
-	uintmax_t	x;
-	char		*t;
+	unsigned long long	x;
+	char				*t;
 
 	if (ft_strcmp(list->length, "l") == 0)
 		x = (unsigned long)va_arg(list->ap, unsigned long int);
@@ -116,7 +116,6 @@ void		type_o(t_printf *list)
 		x = (unsigned short)va_arg(list->ap, unsigned int);
 	else
 		x = (unsigned int)va_arg(list->ap, unsigned long int);
-	x = (uintmax_t)x;
 	if (x == ULONG_MAX)
 		t = ft_strdup("1777777777777777777777");
 	else

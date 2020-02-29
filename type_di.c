@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:26:55 by hlikely           #+#    #+#             */
-/*   Updated: 2020/02/26 18:02:36 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/02/29 19:48:23 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void		di_print_without_minus(t_printf *list, long long x)
 	di_print_without_minus1(list, x);
 }
 
-static void	one_more_func(t_printf *list, intmax_t x)
+static void	one_more_func(t_printf *list, long long x)
 {
 	if (list->flags[0] == '+' && list->flags[2] == ' ')
 		list->flags[2] = '\0';
@@ -94,7 +94,7 @@ static void	one_more_func(t_printf *list, intmax_t x)
 
 void		type_di(t_printf *list)
 {
-	intmax_t x;
+	long long x;
 
 	if (ft_strcmp(list->length, "l") == 0)
 		x = (long)va_arg(list->ap, long int);
@@ -106,7 +106,6 @@ void		type_di(t_printf *list)
 		x = (short)va_arg(list->ap, int);
 	else
 		x = (int)va_arg(list->ap, long int);
-	x = (intmax_t)x;
 	list->len_of_x = ft_len_of_int(x);
 	one_more_func(list, x);
 	while (list->widthofline <= list->widthofcontent && \

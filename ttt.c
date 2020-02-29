@@ -1,16 +1,31 @@
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdarg.h>
-# include <ctype.h>
-# include <limits.h>
+#include <stdio.h>
 
-# include <stdio.h>
-
-int main()
+void foo3(int *arr)
 {
-    unsigned long long l = 14388460377493450260ULL;
-    printf("%llu\n", (unsigned long long)l);
-
-    return 0;
+    arr[1] -= 3;
 }
-// 18446744073709551615
+
+void foo2(int *arr)
+{
+    arr[1] += 11;
+}
+
+void foo1(int *arr)
+{
+    foo2(arr);
+    foo3(arr);
+}
+
+int main (void)
+{
+    int arr[3];
+    
+    arr[0] = 7;
+    arr[1] = 5;
+    arr[2] = 3;
+    foo1(arr);
+    int i = 0;
+    while (i < 3)
+        printf("%d\n", arr[i++]);
+    return (0);
+}

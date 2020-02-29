@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   type_p.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 15:00:21 by hlikely           #+#    #+#             */
-/*   Updated: 2020/02/24 15:15:06 by hlikely          ###   ########.fr       */
+/*   Updated: 2020/02/29 19:50:24 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 #include <limits.h>
 
-void	type_p(t_printf *list)
+int	type_p(t_printf *list)
 {
 	char		*str;
 	uintmax_t	a;
@@ -39,4 +39,5 @@ void	type_p(t_printf *list)
 	if (list->flags[1] == '-')
 		display_gap(list, ' ', list->width - list->len_of_x, 0);
 	free(str);
+	return (0);
 }

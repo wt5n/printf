@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 15:40:55 by hlikely           #+#    #+#             */
-/*   Updated: 2020/02/27 19:00:34 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/02/29 19:51:09 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void		x_print_without_minus(t_printf *list, long long x, char *t)
 	}
 }
 
-static char	*one_more_func(t_printf *list, uintmax_t x, char *t)
+static char	*one_more_func(t_printf *list, unsigned long long x, char *t)
 {
 	if (x == ULONG_MAX && list->type == 'x')
 		t = ft_strdup("ffffffffffffffff");
@@ -118,7 +118,7 @@ static char	*one_more_func(t_printf *list, uintmax_t x, char *t)
 
 void		type_x(t_printf *list)
 {
-	uintmax_t	x;
+	unsigned long long	x;
 	char		*t;
 
 	t = NULL;
@@ -132,7 +132,6 @@ void		type_x(t_printf *list)
 		x = (unsigned short)va_arg(list->ap, unsigned int);
 	else
 		x = (unsigned int)va_arg(list->ap, unsigned long int);
-	x = (uintmax_t)x;
 	t = one_more_func(list, x, t);
 	if ((list->flags[1] == '-') && (list->width > list->widthofcontent))
 		x_print_with_minus(list, x, t);

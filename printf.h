@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+	/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   printf.h                                           :+:      :+:    :+:   */
@@ -29,7 +29,7 @@ typedef	struct				s_printf
 	char					*f_copy;
 	size_t					width;
 	size_t					precision;
-	char					length[3];
+	char					length[4];
 	char					type;
 	size_t					widthofline;
 	size_t					widthofcontent;
@@ -43,6 +43,8 @@ typedef	struct				s_printf
 	char					*types;
 	char					*args;
 	char					*cons;
+	int						floatzero;
+	int						floatminimum;
 }							t_printf;
 
 typedef	union				u_double
@@ -87,7 +89,7 @@ void						type_di(t_printf *list);
 void						di_print_without_minus(t_printf *list, long long x);
 void						di_print_with_minus(t_printf *list, long long x);
 void						presicion_over_len(t_printf *list, long long x);
-void						type_p(t_printf *list);
+int							type_p(t_printf *list);
 void						type_u(t_printf *list);
 void						u_print_without_minus(t_printf *list, char *t);
 void						u_presicion_over_len(t_printf *list, char *t);
@@ -97,9 +99,9 @@ void						x_print_without_minus(t_printf *list, long long x, char *t);
 void						x_presicion_over_len(t_printf *list, long long x, char *t);
 void						x_print_with_minus(t_printf *list, long long x, char *t);
 void						type_o(t_printf *list);
-void						o_print_with_minus(t_printf *list, long long x, char *t);
-void						o_presicion_over_len(t_printf *list, long long x, char *t);
-void						o_print_without_minus(t_printf *list, long long x, char *t);
+void						o_print_with_minus(t_printf *list, unsigned long long x, char *t);
+void						o_presicion_over_len(t_printf *list, unsigned long long x, char *t);
+void						o_print_without_minus(t_printf *list, unsigned long long x, char *t);
 void						sharp_x(t_printf *list);
 void						ft_putchar_cow(char c, t_printf *list);
 void						ft_putstr_cow(char const *s, t_printf *list);
