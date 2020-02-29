@@ -11,15 +11,13 @@
 /* ************************************************************************** */
 
 #include "printf.h"
-#include <limits.h>
 
 int	type_p(t_printf *list)
 {
 	char		*str;
-	uintmax_t	a;
+	unsigned long	a;
 
 	a = (unsigned long)(va_arg(list->ap, unsigned long int));
-	a = (uintmax_t)a;
 	if (!(str = adv_ft_itoa(a, 16, 'a')))
 		exit(-1);
 	if (list->precision == 0 && a == 0)

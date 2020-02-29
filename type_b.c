@@ -88,7 +88,7 @@ void		b_print_without_minus(t_printf *list, long long x)
 	free(t);
 }
 
-static void	one_more_func(t_printf *list, uintmax_t x)
+static void	one_more_func(t_printf *list, unsigned long x)
 {
 	if (list->precision == 0 && list->np == 'n' && (list->flags[3] != '#'))
 		list->len_of_x = 0;
@@ -111,7 +111,7 @@ static void	one_more_func(t_printf *list, uintmax_t x)
 
 void		type_b(t_printf *list)
 {
-	uintmax_t x;
+	unsigned long x;
 
 	if (ft_strcmp(list->length, "l") == 0)
 		x = (unsigned long)va_arg(list->ap, unsigned long int);
@@ -123,7 +123,6 @@ void		type_b(t_printf *list)
 		x = (unsigned short)va_arg(list->ap, unsigned int);
 	else
 		x = (unsigned int)va_arg(list->ap, unsigned long int);
-	x = (uintmax_t)x;
 	list->base = 2;
 	list->len_of_x = lennum_base(x, list->base);
 	one_more_func(list, x);
