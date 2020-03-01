@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 19:22:56 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/02/29 22:09:30 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/03/01 14:17:51 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,22 @@ void	handling_float_part2(t_printf *list, char *tmp, long long n, int s)
 		ft_putchar_cow(*tmp++, list);
 }
 
+void	nulz(long double d, t_printf *list)
+{
+	//printf("test\n");
+	//return ;
+	if (d == -__DBL_MIN__)
+		ft_putchar_cow('-', list);
+	ft_putchar_cow('0', list);
+	if (list->precision)
+		ft_putchar_cow('.', list);
+	while (list->precision > 0)
+	{
+		ft_putchar_cow('0', list);
+		list->precision--;
+	}
+}
+
 void	handling_float(long double d, int countofel, int pow, t_printf *list)
 {
 	t_double			d1;
@@ -130,12 +146,19 @@ void	handling_float(long double d, int countofel, int pow, t_printf *list)
 	char				*tmp;
 	long long			n;
 
+	/*
 	if (d == 0 || d == __DBL_MIN__ || d == -__DBL_MIN__)
 	{
 		if (d == -__DBL_MIN__)
 			list->floatminimum = 1;
 		d = 1;
 		list->floatzero = 1;
+	}
+	*/
+	if (d == 0 || d == __DBL_MIN__ || d == -__DBL_MIN__)
+	{
+		nulz(d, list);
+		return ;
 	}
 	n = 98;
 	i = 0;
