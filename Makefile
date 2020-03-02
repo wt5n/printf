@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+         #
+#    By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/16 15:45:02 by ksenaida          #+#    #+#              #
-#    Updated: 2020/02/28 20:31:19 by ksenaida         ###   ########.fr        #
+#    Updated: 2020/03/02 19:03:53 by hlikely          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,10 +29,15 @@ LIBFTO = ./libft/*.o
 
 all: $(NAME)
 
-$(NAME):
-		make -C $(LIBFT)
-		gcc $(FLAGS) -c $(SRC1) -I $(HDR)
-		ar rc $(NAME) $(OBJ1) $(LIBFTO)
+$(NAME): $(OBJ1) $(SRC1) $(LIBFT)
+	make -C $(LIBFT)
+	ar rc $(NAME) $(OBJ1) $(LIBFTO)
+
+%.o:%.c
+	gcc -c -Wall -Wextra -Werror -I$(HDR) $<
+
+%.c:%.h
+	gcc -I$(HDR) $<
 
 clean:
 	rm -rf $(OBJ1)
