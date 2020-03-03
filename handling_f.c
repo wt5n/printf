@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 19:22:56 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/03/01 14:17:51 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/03/03 17:38:18 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int		ap_number(t_double d1, unsigned long long *arr, int countofel, int pow)
 	int		i;
 	int		n;
 
+
 	i = 0;
 	while (i < countofel)
 		arr[i++] = 0;
@@ -84,19 +85,16 @@ int		ap_number(t_double d1, unsigned long long *arr, int countofel, int pow)
 			mult(arr, 0, 5, countofel);
 			pow++;
 		}
-		//while (pow++ < ((d1.part.e - 1023) * -1))
-		//	divis(arr, 15, 10);
 	}
 	n = d1.part.e - 1023;
 	if (n < 0)
 		return (n);
 	return (0);
-	//((d1.part.e - 1023) < 0) ? n = n : n = 0;
-	//printf("%d", d1.part.e - 1023);
 }
 
 void	handling_float_part2(t_printf *list, char *tmp, long long n, int s)
 {
+
 	while (*tmp == '0' && n > 1)
 	{
 		tmp++;
@@ -112,8 +110,11 @@ void	handling_float_part2(t_printf *list, char *tmp, long long n, int s)
 	}
 	if (((list->precision == 0 && list->np == 'n') || list->precision))
 		rounding(tmp, list->precision + n);
-	while (n--)
+	while (n > 0)
+	{
 		ft_putchar_cow(*tmp++, list);
+		n--;
+	}
 	if (list->precision || list->flags[3] == '#')
 		ft_putchar_cow('.', list);
 	while (list->precision--)
@@ -122,8 +123,6 @@ void	handling_float_part2(t_printf *list, char *tmp, long long n, int s)
 
 void	nulz(long double d, t_printf *list)
 {
-	//printf("test\n");
-	//return ;
 	if (d == -__DBL_MIN__)
 		ft_putchar_cow('-', list);
 	ft_putchar_cow('0', list);
@@ -146,15 +145,6 @@ void	handling_float(long double d, int countofel, int pow, t_printf *list)
 	char				*tmp;
 	long long			n;
 
-	/*
-	if (d == 0 || d == __DBL_MIN__ || d == -__DBL_MIN__)
-	{
-		if (d == -__DBL_MIN__)
-			list->floatminimum = 1;
-		d = 1;
-		list->floatzero = 1;
-	}
-	*/
 	if (d == 0 || d == __DBL_MIN__ || d == -__DBL_MIN__)
 	{
 		nulz(d, list);
