@@ -6,7 +6,7 @@
 #    By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/16 15:45:02 by ksenaida          #+#    #+#              #
-#    Updated: 2020/03/03 17:39:26 by hlikely          ###   ########.fr        #
+#    Updated: 2020/03/03 17:42:18 by hlikely          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,9 +35,6 @@ $(NAME): $(OBJ1) $(SRC1) $(LIBFT) $(HDR)
 
 %.o:%.c
 	gcc -c -Wall -Wextra -Werror -I$(HDR) $<
-
-# %.c:$(HDR)
-# 	gcc -c -Wall -Wextra -Werror -I$(HDR) $<
 
 clean:
 	rm -rf $(OBJ1)
