@@ -6,7 +6,7 @@
 #    By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/16 15:45:02 by ksenaida          #+#    #+#              #
-#    Updated: 2020/03/02 19:03:53 by hlikely          ###   ########.fr        #
+#    Updated: 2020/03/03 17:39:26 by hlikely          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,15 +29,15 @@ LIBFTO = ./libft/*.o
 
 all: $(NAME)
 
-$(NAME): $(OBJ1) $(SRC1) $(LIBFT)
+$(NAME): $(OBJ1) $(SRC1) $(LIBFT) $(HDR)
 	make -C $(LIBFT)
 	ar rc $(NAME) $(OBJ1) $(LIBFTO)
 
 %.o:%.c
 	gcc -c -Wall -Wextra -Werror -I$(HDR) $<
 
-%.c:%.h
-	gcc -I$(HDR) $<
+# %.c:$(HDR)
+# 	gcc -c -Wall -Wextra -Werror -I$(HDR) $<
 
 clean:
 	rm -rf $(OBJ1)
