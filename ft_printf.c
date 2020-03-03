@@ -6,7 +6,7 @@
 /*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:25:19 by hlikely           #+#    #+#             */
-/*   Updated: 2020/02/29 21:38:56 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/03/03 17:21:08 by ksenaida         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_printf	*newlist_with_printf(t_printf *list)
 	list->np = 'n';
 	list->nw = 'n';
 	list->i = 0;
-	list->types = "aAbcCeEgGsSnpdDifFuUoxX%";
+	list->types = "aAbcCeEgGsSnpdifFuUoxX%";
 	list->cons = "+- #0";
 	list->args = "lhjzL";
 	list->len_of_x = 0;
@@ -91,7 +91,7 @@ t_printf	*newlist_with_printf(t_printf *list)
 
 void		display(t_printf *list)
 {
-	if (list->type == 'd' || list->type == 'i' || list->type == 'D')
+	if (list->type == 'd' || list->type == 'i')
 		type_di(list);
 	else if (list->type == 'c' || list->type == 'C')
 		type_c(list);
