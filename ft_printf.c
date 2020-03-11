@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 16:25:19 by hlikely           #+#    #+#             */
-/*   Updated: 2020/03/03 17:21:08 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/03/06 18:53:09 by hlikely          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,13 +109,15 @@ void		display(t_printf *list)
 		type_p(list);
 	else if (list->type == 'b')
 		type_b(list);
+	// else if (list->type == 'e' || list->type == 'E')
+	// 	type_e(list);
 	else
 		type_other(list);
 }
 
 int			ft_printf(const char *format, ...)
 {
-	t_printf 	*list;
+	t_printf	*list;
 	int			i;
 
 	if (!(list = (t_printf*)malloc(sizeof(t_printf))))

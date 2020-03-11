@@ -6,7 +6,7 @@
 /*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 17:47:52 by ksenaida          #+#    #+#             */
-/*   Updated: 2020/02/24 15:21:16 by hlikely          ###   ########.fr       */
+/*   Updated: 2020/03/06 18:11:18 by hlikely          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ t_printf	*width(t_printf *list)
 			num /= 10;
 		}
 	}
+	else if (list->f_copy[list->i] == '*')
+		stars(list);
 	else
 		list->nw = 'y';
 	return (precision(list));
@@ -59,7 +61,7 @@ t_printf	*width(t_printf *list)
 
 t_printf	*precision(t_printf *list)
 {
-	if (list->f_copy[list->i] == '.')
+	if (list->f_copy[list->i] == '.' && list->f_copy[list->i+1] != '*')
 	{
 		list->i++;
 		while (list->f_copy[list->i] >= '0' && list->f_copy[list->i] <= '9')
@@ -69,6 +71,8 @@ t_printf	*precision(t_printf *list)
 			list->i++;
 		}
 	}
+	else if (list->f_copy[list->i+1] == '*')
+		stars(list);
 	else
 		list->np = 'y';
 	return (length(list));

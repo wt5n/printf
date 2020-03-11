@@ -132,5 +132,6 @@ void						f_print_without_minus1(t_printf *list, long double x);
 void						handling_float_lf(long double d, int countofel, int pow, t_printf *list);
 int							withnull(char *str, char *res, int len, int x);
 char						*full_str(unsigned long long *arr, int i);
+void						stars(t_printf *list);
 
 #endif

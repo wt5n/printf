@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_func.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksenaida <ksenaida@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlikely <hlikely@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 15:55:50 by hlikely           #+#    #+#             */
-/*   Updated: 2020/02/25 19:10:35 by ksenaida         ###   ########.fr       */
+/*   Updated: 2020/03/06 18:12:55 by hlikely          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,21 @@ size_t	ft_len_of_int(long long i)
 		i /= 10;
 	}
 	return (res);
+}
+
+void	stars(t_printf *list)
+{
+	int	x;
+
+	x = (unsigned int)va_arg(list->ap, unsigned long int);
+	if (list->nw == 'n' && list->f_copy[list->i] == '*')
+	{
+		list->width = x;
+		list->i++;
+	}
+	else if (list->f_copy[list->i] == '.')
+	{	
+		list->precision = x;
+		list->i += 2;
+	}
 }
